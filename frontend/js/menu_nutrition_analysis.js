@@ -32,6 +32,9 @@
         glycemicLoad: 0
     };
     
+    let modalOverlay = null;
+    let nutritionSummaryModal = null;
+    
     // 全局添加点击事件以捕获右上角的营养分析按钮点击
     document.addEventListener('click', function(event) {
         // 使用更全面的判断逻辑，确保能捕获到按钮点击
@@ -110,117 +113,100 @@
     function ensureModalExists() {
         console.log('检查并确保模态框存在');
         
-        let overlay = document.getElementById('nutrition-overlay');
-        let modal = document.getElementById('nutrition-summary-modal');
-        
-        // 如果模态框不存在，创建模态框
-        if (!overlay) {
-            console.log('创建遮罩层');
-            overlay = document.createElement('div');
-            overlay.id = 'nutrition-overlay';
-            overlay.className = 'modal-overlay';
-            document.body.appendChild(overlay);
+        if (modalOverlay && nutritionSummaryModal) {
+            return;
         }
-        
-        if (!modal) {
-            console.log('创建模态框');
-            modal = document.createElement('div');
-            modal.id = 'nutrition-summary-modal';
-            modal.className = 'nutrition-summary-modal';
-            
-            modal.innerHTML = `
-                <div class="nutrition-summary-header">
-                    <div class="nutrition-summary-title">营养分析</div>
-                    <div class="close-nutrition-button" id="close-nutrition-modal">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+
+        // 创建模态框遮罩层
+        modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal-overlay';
+        document.querySelector('.menu-recognition-container').appendChild(modalOverlay);
+
+        // 创建营养总结模态框
+        nutritionSummaryModal = document.createElement('div');
+        nutritionSummaryModal.className = 'nutrition-summary-modal';
+        nutritionSummaryModal.innerHTML = `
+            <div class="modal-header">
+                <h3>营养分析</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="total-values">
+                    <div class="total-calories">
+                        <h4>总热量</h4>
+                        <p class="value">0</p>
+                        <p class="unit">卡路里</p>
                     </div>
-                </div>
-                <div class="nutrition-summary-content">
-                    <div class="selected-dishes-section">
-                        <h3 class="section-title">已选菜品</h3>
-                        <div class="selected-dishes-list" id="selected-dishes-list">
-                            <!-- 动态生成菜品列表 -->
+                    <div class="glycemic-info">
+                        <div class="glycemic-load">
+                            <h4>血糖负荷 <i class="info-icon">i</i></h4>
+                            <p class="value">0</p>
+                            <p class="unit">GL</p>
                         </div>
-                    </div>
-                    
-                    <div class="nutrition-summary-section">
-                        <h3 class="section-title">营养总结</h3>
-                        <div class="total-calories">
-                            <span class="value">0</span>
-                            <span class="label">卡路里</span>
-                        </div>
-                        
-                        <div class="macros-container">
-                            <div class="macro-item">
-                                <div class="macro-label">
-                                    <span class="name">蛋白质</span>
-                                    <span class="amount">0g</span>
-                                </div>
-                                <div class="macro-bar-container">
-                                    <div class="macro-bar protein" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="macro-item">
-                                <div class="macro-label">
-                                    <span class="name">碳水化合物</span>
-                                    <span class="amount">0g</span>
-                                </div>
-                                <div class="macro-bar-container">
-                                    <div class="macro-bar carbs" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="macro-item">
-                                <div class="macro-label">
-                                    <span class="name">脂肪</span>
-                                    <span class="amount">0g</span>
-                                </div>
-                                <div class="macro-bar-container">
-                                    <div class="macro-bar fat" style="width: 0%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="glycemic-analysis-section">
-                        <h3 class="section-title">血糖影响</h3>
-                        <div class="glycemic-score">
-                            <div class="score-chart">
-                                <svg viewBox="0 0 100 100" class="circular-chart">
-                                    <circle class="chart-background" cx="50" cy="50" r="45"></circle>
-                                    <circle class="chart-value" cx="50" cy="50" r="45" stroke-dasharray="0, 283"></circle>
-                                    <text x="50" y="50" class="chart-text">0</text>
-                                </svg>
-                            </div>
-                            <div class="score-description">
-                                <div class="score-label">血糖负荷</div>
-                                <div class="score-value">低</div>
-                                <div class="score-info">
-                                    <button class="info-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="glycemic-index">
+                            <h4>平均血糖指数</h4>
+                            <p class="value">0</p>
+                            <p class="unit">GI</p>
                         </div>
                     </div>
                 </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // 为信息按钮添加事件
-            const infoButton = modal.querySelector('.info-button');
-            if (infoButton) {
-                infoButton.addEventListener('click', function() {
-                    showMessage('血糖负荷(GL)表示食物对血糖的总体影响。低GL(≤10)对血糖影响小，高GL(>20)对血糖影响大。');
-                });
+                <div class="macros">
+                    <div class="macro protein">
+                        <div class="macro-label">
+                            <span class="macro-name">蛋白质</span>
+                            <span class="macro-value">0g</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%; background-color: #4CAF50;"></div>
+                        </div>
+                    </div>
+                    <div class="macro carbs">
+                        <div class="macro-label">
+                            <span class="macro-name">碳水化合物</span>
+                            <span class="macro-value">0g</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%; background-color: #2196F3;"></div>
+                        </div>
+                    </div>
+                    <div class="macro fat">
+                        <div class="macro-label">
+                            <span class="macro-name">脂肪</span>
+                            <span class="macro-value">0g</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%; background-color: #FF9800;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.querySelector('.menu-recognition-container').appendChild(nutritionSummaryModal);
+
+        // 关闭按钮点击事件
+        const closeButton = nutritionSummaryModal.querySelector('.close-btn');
+        closeButton.addEventListener('click', closeNutritionModal);
+
+        // 点击模态框外部关闭
+        modalOverlay.addEventListener('click', closeNutritionModal);
+
+        // 点击模态框内部阻止事件冒泡
+        nutritionSummaryModal.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // 添加血糖负荷信息图标点击事件
+        const infoIcon = nutritionSummaryModal.querySelector('.info-icon');
+        infoIcon.addEventListener('click', function() {
+            alert('血糖负荷(GL)是一种评估食物对血糖影响的指标，由食物的血糖指数和碳水化合物含量共同决定。GL低于10为低，10-20为中等，大于20为高。');
+        });
+
+        // 添加ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeNutritionModal();
             }
-        }
+        });
     }
     
     /**
@@ -410,7 +396,9 @@
             let totalProtein = 0;
             let totalCarbs = 0;
             let totalFat = 0;
-            let totalGlycemicLoad = 0;
+            let totalGL = 0;
+            let weightedGI = 0;
+            let totalCarbsForGI = 0;
             
             // 更新已选菜品列表
             const dishesList = document.getElementById('selected-dishes-list');
@@ -422,7 +410,16 @@
                     totalProtein += dish.protein || 0;
                     totalCarbs += dish.carbs || 0;
                     totalFat += dish.fat || 0;
-                    totalGlycemicLoad += dish.glycemicLoad || 0;
+                    
+                    // 计算血糖负荷
+                    const dishGL = ((dish.gi || 0) * (dish.carbs || 0)) / 100;
+                    totalGL += dishGL;
+                    
+                    // 计算加权血糖指数
+                    if (dish.carbs > 0 && dish.gi > 0) {
+                        weightedGI += (dish.gi * dish.carbs);
+                        totalCarbsForGI += dish.carbs;
+                    }
                     
                     // 生成菜品HTML
                     html += `
@@ -438,32 +435,19 @@
                 dishesList.innerHTML = html;
             }
             
-            // 计算宏营养素百分比
-            const totalMacros = totalProtein + totalCarbs + totalFat;
-            const proteinPercent = totalMacros > 0 ? Math.round((totalProtein / totalMacros) * 100) : 0;
-            const carbsPercent = totalMacros > 0 ? Math.round((totalCarbs / totalMacros) * 100) : 0;
-            const fatPercent = totalMacros > 0 ? Math.round((totalFat / totalMacros) * 100) : 0;
-            
-            // 确定血糖负荷等级
-            let glycemicCategory = '低';
-            if (totalGlycemicLoad <= 10) {
-                glycemicCategory = '低';
-            } else if (totalGlycemicLoad <= 20) {
-                glycemicCategory = '中';
-            } else {
-                glycemicCategory = '高';
-            }
+            // 计算平均血糖指数
+            const avgGI = totalCarbsForGI > 0 ? Math.round(weightedGI / totalCarbsForGI) : 0;
             
             // 更新总卡路里
             const caloriesElement = document.querySelector('.total-calories .value');
             if (caloriesElement) {
-                caloriesElement.textContent = totalCalories;
+                caloriesElement.textContent = Math.round(totalCalories);
             }
             
             // 更新宏量营养素
-            updateMacronutrient('protein', totalProtein, proteinPercent);
-            updateMacronutrient('carbs', totalCarbs, carbsPercent);
-            updateMacronutrient('fat', totalFat, fatPercent);
+            updateMacronutrient('protein', totalProtein, nutritionData.proteinPercent);
+            updateMacronutrient('carbs', totalCarbs, nutritionData.carbsPercent);
+            updateMacronutrient('fat', totalFat, nutritionData.fatPercent);
             
             // 更新血糖负荷
             const chartText = document.querySelector('.chart-text');
@@ -471,23 +455,23 @@
             const scoreValue = document.querySelector('.score-value');
             
             if (chartText) {
-                chartText.textContent = totalGlycemicLoad;
+                chartText.textContent = Math.round(totalGL);
             }
             
             if (chartValue) {
                 // 计算圆环进度
                 const circumference = 2 * Math.PI * 45;
                 const maxValue = 30;
-                const value = Math.min(totalGlycemicLoad, maxValue);
+                const value = Math.min(totalGL, maxValue);
                 const percent = value / maxValue;
                 const offset = circumference - (percent * circumference);
                 
                 chartValue.setAttribute('stroke-dasharray', `${circumference - offset}, ${offset}`);
                 
                 // 根据负荷值设置颜色
-                if (totalGlycemicLoad <= 10) {
+                if (totalGL <= 10) {
                     chartValue.setAttribute('stroke', '#4ECDC4'); // 绿色
-                } else if (totalGlycemicLoad <= 20) {
+                } else if (totalGL <= 20) {
                     chartValue.setAttribute('stroke', '#FFD166'); // 黄色
                 } else {
                     chartValue.setAttribute('stroke', '#FF6B6B'); // 红色
@@ -495,12 +479,12 @@
             }
             
             if (scoreValue) {
-                scoreValue.textContent = glycemicCategory;
+                scoreValue.textContent = nutritionData.glycemicCategory;
                 
                 // 根据类别设置颜色
-                if (glycemicCategory === '低') {
+                if (nutritionData.glycemicCategory === '低') {
                     scoreValue.style.color = '#4ECDC4'; // 绿色
-                } else if (glycemicCategory === '中') {
+                } else if (nutritionData.glycemicCategory === '中') {
                     scoreValue.style.color = '#FFD166'; // 黄色
                 } else {
                     scoreValue.style.color = '#FF6B6B'; // 红色
@@ -543,35 +527,136 @@
     function showNutritionSummary() {
         console.log('显示营养分析模态框');
         
-        // 获取选中的菜品
         const selectedDishes = getSelectedDishes();
         
-        // 检查是否有选中菜品
         if (selectedDishes.length === 0) {
-            showMessage('请先选择至少一个菜品');
+            // 显示提示消息
+            showToast("请至少选择一道菜品进行营养分析");
             return;
         }
+        
+        createModal();
         
         // 更新模态框内容
         updateModalContent(selectedDishes);
         
         // 显示模态框
-        const overlay = document.getElementById('nutrition-overlay');
-        const modal = document.getElementById('nutrition-summary-modal');
+        modalOverlay.classList.add('show');
+        nutritionSummaryModal.classList.add('show');
         
-        if (!overlay || !modal) {
-            console.error('找不到模态框元素');
+        // 禁止菜单容器滚动
+        document.querySelector('.menu-recognition-container').style.overflow = 'hidden';
+    }
+    
+    /**
+     * 创建营养分析模态框
+     * @function
+     * @description 如果模态框不存在，则创建模态框及相关UI元素
+     */
+    function createModal() {
+        console.log('创建营养分析模态框');
+        
+        // 如果模态框已存在，则不需要再次创建
+        if (modalOverlay && nutritionSummaryModal && 
+            document.body.contains(modalOverlay) && 
+            document.body.contains(nutritionSummaryModal)) {
+            console.log('模态框已存在，无需重新创建');
             return;
         }
         
-        // 显示遮罩和模态框
-        overlay.classList.add('show');
-        modal.classList.add('show');
+        // 创建模态框遮罩层
+        modalOverlay = document.createElement('div');
+        modalOverlay.id = 'nutrition-overlay';
+        modalOverlay.className = 'modal-overlay';
+        document.querySelector('.menu-recognition-container').appendChild(modalOverlay);
         
-        // 禁止背景滚动
-        document.body.style.overflow = 'hidden';
+        // 创建营养分析模态框
+        nutritionSummaryModal = document.createElement('div');
+        nutritionSummaryModal.id = 'nutrition-summary-modal';
+        nutritionSummaryModal.className = 'nutrition-summary-modal';
+        nutritionSummaryModal.innerHTML = `
+            <div class="modal-header">
+                <h3>营养分析</h3>
+                <button id="close-nutrition-modal" class="close-button">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="nutrition-summary">
+                    <div class="total-section">
+                        <div class="total-calories">
+                            <h4>总热量</h4>
+                            <p class="value">0</p>
+                            <p class="unit">卡路里</p>
+                        </div>
+                        <div class="glycemic-section">
+                            <div class="glycemic-load">
+                                <h4>血糖负荷 <i class="info-icon">i</i></h4>
+                                <p class="value">0</p>
+                                <p class="unit">GL</p>
+                            </div>
+                            <div class="glycemic-index">
+                                <h4>平均血糖指数</h4>
+                                <p class="value">0</p>
+                                <p class="unit">GI</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macros">
+                        <h4>营养素分布</h4>
+                        <div class="macro protein">
+                            <div class="macro-label">
+                                <span class="macro-name">蛋白质</span>
+                                <span class="macro-value">0g</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%; background-color: #4CAF50;"></div>
+                            </div>
+                        </div>
+                        <div class="macro carbs">
+                            <div class="macro-label">
+                                <span class="macro-name">碳水化合物</span>
+                                <span class="macro-value">0g</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%; background-color: #2196F3;"></div>
+                            </div>
+                        </div>
+                        <div class="macro fat">
+                            <div class="macro-label">
+                                <span class="macro-name">脂肪</span>
+                                <span class="macro-value">0g</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%; background-color: #FF9800;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
         
-        console.log('营养分析模态框已显示');
+        document.querySelector('.menu-recognition-container').appendChild(nutritionSummaryModal);
+        
+        // 添加事件监听器
+        const closeButton = nutritionSummaryModal.querySelector('#close-nutrition-modal');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeNutritionModal);
+        }
+        
+        // 点击模态框外部关闭
+        modalOverlay.addEventListener('click', closeNutritionModal);
+        
+        // 点击模态框内部阻止事件冒泡
+        nutritionSummaryModal.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // 添加信息图标点击事件
+        const infoIcon = nutritionSummaryModal.querySelector('.info-icon');
+        if (infoIcon) {
+            infoIcon.addEventListener('click', function() {
+                alert('血糖负荷(GL)是一种评估食物对血糖影响的指标，由食物的血糖指数和碳水化合物含量共同决定。GL低于10为低，10-20为中等，大于20为高。');
+            });
+        }
     }
     
     /**
@@ -582,22 +667,13 @@
     function hideNutritionSummary() {
         console.log('隐藏营养分析模态框');
         
-        const overlay = document.getElementById('nutrition-overlay');
-        const modal = document.getElementById('nutrition-summary-modal');
-        
-        if (!overlay || !modal) {
-            console.warn('找不到模态框元素');
-            return;
+        if (modalOverlay && nutritionSummaryModal) {
+            modalOverlay.classList.remove('show');
+            nutritionSummaryModal.classList.remove('show');
+            
+            // 恢复菜单容器滚动
+            document.querySelector('.menu-recognition-container').style.overflow = 'auto';
         }
-        
-        // 隐藏遮罩和模态框
-        overlay.classList.remove('show');
-        modal.classList.remove('show');
-        
-        // 恢复背景滚动
-        document.body.style.overflow = '';
-        
-        console.log('营养分析模态框已隐藏');
     }
     
     /**
@@ -731,23 +807,27 @@
     /**
      * 显示消息提示
      */
-    function showMessage(message, duration = 2000) {
-        console.log('显示消息:', message);
+    function showToast(message) {
+        console.log("显示提示：" + message);
         
-        let toast = document.querySelector('.toast');
+        // 检查是否已存在toast元素
+        let toast = document.querySelector('.toast-message');
         
         if (!toast) {
+            // 创建toast元素
             toast = document.createElement('div');
-            toast.className = 'toast';
-            document.body.appendChild(toast);
+            toast.className = 'toast-message';
+            document.querySelector('.menu-recognition-container').appendChild(toast);
         }
         
+        // 设置消息内容
         toast.textContent = message;
         toast.classList.add('show');
         
-        setTimeout(() => {
+        // 3秒后自动隐藏
+        setTimeout(function() {
             toast.classList.remove('show');
-        }, duration);
+        }, 3000);
     }
     
     /**
