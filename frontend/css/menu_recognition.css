@@ -942,7 +942,6 @@
   margin-left: 12px !important;
   cursor: pointer !important;
   transition: all 0.2s ease-in-out !important;
-  z-index: 100 !important;
 }
 
 .nutrition-summary-button:hover {
@@ -959,7 +958,7 @@
 .nutrition-icon {
   width: 22px !important;
   height: 22px !important;
-  color: #4CAF50 !important;
+  color: #FFBE98 !important;
 }
 
 .nutrition-badge {
@@ -980,90 +979,319 @@
   justify-content: center !important;
 }
 
-/* 确保面板显示在正确的位置 */
-.nutrition-panel-overlay {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  z-index: 10000 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end !important;
-  transition: opacity 0.3s ease !important;
+/* 营养信息浮层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
-.nutrition-summary-panel {
-  background-color: #fff !important;
-  border-top-left-radius: 16px !important;
-  border-top-right-radius: 16px !important;
-  padding: 20px !important;
-  max-height: 70% !important;
-  overflow-y: auto !important;
-  transform: translateY(100%) !important;
-  transition: transform 0.3s ease !important;
-  position: relative !important;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
 }
 
-.drag-handle {
-  width: 40px;
-  height: 5px;
-  background-color: #E5E7EB;
-  border-radius: 3px;
-  margin: 0 auto 16px;
+.nutrition-summary-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 360px;
+  max-height: 80vh;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* 营养数据样式 */
-.nutrient-bar {
+.nutrition-summary-modal.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.nutrition-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nutrition-summary-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-nutrition-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  transition: background-color 0.2s ease;
+}
+
+.close-nutrition-button:hover {
+  background-color: #e5e5e5;
+}
+
+.close-nutrition-button svg {
+  width: 18px;
+  height: 18px;
+  color: #666;
+}
+
+.nutrition-summary-content {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(80vh - 60px);
+}
+
+/* 选择的菜品列表 */
+.selected-dishes-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.selected-dishes-list {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.selected-dish-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.selected-dish-item:last-child {
+  border-bottom: none;
+}
+
+.dish-info {
+  flex: 1;
+}
+
+.dish-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.dish-quantity {
+  font-size: 12px;
+  color: #666;
+}
+
+.dish-calories {
+  font-size: 14px;
+  color: #FFBE98;
+  font-weight: 500;
+}
+
+/* 营养摘要 */
+.nutrition-summary-section {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.total-calories {
+  text-align: center;
   margin-bottom: 16px;
 }
 
-.nutrient-bar:last-child {
-  margin-bottom: 0;
+.total-calories .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFBE98;
+  display: block;
 }
 
-.nutrient-bar .h-2 {
+.total-calories .label {
+  font-size: 14px;
+  color: #666;
+}
+
+.macros-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.macro-item {
+  margin-bottom: 8px;
+}
+
+.macro-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.macro-label .name {
+  font-size: 14px;
+  color: #333;
+}
+
+.macro-label .amount {
+  font-size: 14px;
+  color: #666;
+}
+
+.macro-bar-container {
   height: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   overflow: hidden;
-  background-color: #F3F4F6;
 }
 
-.nutrient-bar .h-full {
+.macro-bar {
   height: 100%;
   border-radius: 4px;
+  transition: width 0.5s ease-out;
 }
 
-.bg-blue-500 {
-  background-color: #3B82F6;
+.macro-bar.protein {
+  background-color: #4ECDC4;
 }
 
-.bg-yellow-500 {
-  background-color: #F59E0B;
+.macro-bar.carbs {
+  background-color: #FFD166;
 }
 
-.bg-red-500 {
-  background-color: #EF4444;
+.macro-bar.fat {
+  background-color: #FF6B6B;
 }
 
-.bg-green-500 {
-  background-color: #10B981;
+/* 血糖影响分析 */
+.glycemic-analysis-section {
+  margin-bottom: 24px;
 }
 
-/* 文本颜色 */
-.text-green-600 {
-  color: #059669;
+.glycemic-score {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.text-yellow-600 {
-  color: #D97706;
+.score-chart {
+  width: 90px;
+  height: 90px;
 }
 
-.text-red-600 {
-  color: #DC2626;
+.circular-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-background {
+  stroke: #f5f5f5;
+  fill: none;
+  stroke-width: 10;
+}
+
+.chart-value {
+  stroke: #FFBE98;
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dasharray 0.5s ease-out;
+}
+
+.chart-text {
+  fill: #333;
+  font-size: 24px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.score-description {
+  flex: 1;
+}
+
+.score-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.score-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFBE98;
+  margin-bottom: 8px;
+}
+
+.info-button {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.info-button svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* 健康小贴士 */
+.health-tips-section {
+  background-color: rgba(255, 190, 152, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.health-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.tip-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
 }
 
 /* 菜品列表样式 */

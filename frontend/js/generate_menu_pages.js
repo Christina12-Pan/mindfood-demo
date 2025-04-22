@@ -104,9 +104,9 @@
                     <div class="menu-recognition-title">Menu Result</div>
                     <div class="nutrition-summary-button" id="nutrition-summary-button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="nutrition-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
-                        <div class="nutrition-badge">2</div>
+                        <div class="nutrition-badge">0</div>
                     </div>
                 </div>
                 
@@ -388,7 +388,7 @@
             <div class="modal-overlay" id="nutrition-overlay"></div>
             <div class="nutrition-summary-modal" id="nutrition-summary-modal">
                 <div class="nutrition-summary-header">
-                    <div class="nutrition-summary-title">营养信息汇总</div>
+                    <div class="nutrition-summary-title">Nutrition Analysis</div>
                     <div class="close-nutrition-button" id="close-nutrition-modal">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -396,72 +396,92 @@
                     </div>
                 </div>
                 <div class="nutrition-summary-content">
+                    <!-- 选择的菜品列表 -->
+                    <div class="selected-dishes-section">
+                        <h3 class="section-title">Selected Dishes</h3>
+                        <div class="selected-dishes-list" id="selected-dishes-list">
+                            <!-- 动态生成选择的菜品列表 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 营养摘要 -->
                     <div class="nutrition-summary-section">
-                        <div class="nutrition-summary-section-title">主要营养素</div>
-                        <div class="nutrition-metrics">
-                            <div class="nutrition-metric-item">
-                                <div class="nutrition-metric-name">卡路里</div>
-                                <div class="nutrition-metric-value">685<span class="nutrition-metric-unit">kcal</span></div>
-                            </div>
-                            <div class="nutrition-metric-item">
-                                <div class="nutrition-metric-name">蛋白质</div>
-                                <div class="nutrition-metric-value">42<span class="nutrition-metric-unit">g</span></div>
-                                <div class="nutrition-progress-bar">
-                                    <div class="nutrition-progress-fill protein" style="width: 70%"></div>
+                        <h3 class="section-title">Nutrition Summary</h3>
+                        <div class="total-calories">
+                            <span class="value">0</span>
+                            <span class="label">calories</span>
+                        </div>
+                        
+                        <div class="macros-container">
+                            <!-- 蛋白质 -->
+                            <div class="macro-item">
+                                <div class="macro-label">
+                                    <span class="name">Protein</span>
+                                    <span class="amount">0g</span>
+                                </div>
+                                <div class="macro-bar-container">
+                                    <div class="macro-bar protein" style="width: 0%"></div>
                                 </div>
                             </div>
-                            <div class="nutrition-metric-item">
-                                <div class="nutrition-metric-name">碳水化合物</div>
-                                <div class="nutrition-metric-value">65<span class="nutrition-metric-unit">g</span></div>
-                                <div class="nutrition-progress-bar">
-                                    <div class="nutrition-progress-fill carbs" style="width: 50%"></div>
+                            
+                            <!-- 碳水化合物 -->
+                            <div class="macro-item">
+                                <div class="macro-label">
+                                    <span class="name">Carbs</span>
+                                    <span class="amount">0g</span>
+                                </div>
+                                <div class="macro-bar-container">
+                                    <div class="macro-bar carbs" style="width: 0%"></div>
                                 </div>
                             </div>
-                            <div class="nutrition-metric-item">
-                                <div class="nutrition-metric-name">脂肪</div>
-                                <div class="nutrition-metric-value">28<span class="nutrition-metric-unit">g</span></div>
-                                <div class="nutrition-progress-bar">
-                                    <div class="nutrition-progress-fill fat" style="width: 45%"></div>
+                            
+                            <!-- 脂肪 -->
+                            <div class="macro-item">
+                                <div class="macro-label">
+                                    <span class="name">Fat</span>
+                                    <span class="amount">0g</span>
+                                </div>
+                                <div class="macro-bar-container">
+                                    <div class="macro-bar fat" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="nutrition-summary-section">
-                        <div class="nutrition-summary-section-title">营养素详情</div>
-                        <div class="nutrition-breakdown">
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">饱和脂肪</div>
-                                <div class="nutrition-breakdown-value">8g</div>
+                    <!-- 血糖影响分析 -->
+                    <div class="glycemic-analysis-section">
+                        <h3 class="section-title">Glycemic Impact</h3>
+                        <div class="glycemic-score">
+                            <div class="score-chart">
+                                <svg viewBox="0 0 100 100" class="circular-chart">
+                                    <circle class="chart-background" cx="50" cy="50" r="45"></circle>
+                                    <circle class="chart-value" cx="50" cy="50" r="45" stroke-dasharray="0, 283"></circle>
+                                    <text x="50" y="50" class="chart-text">0</text>
+                                </svg>
                             </div>
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">不饱和脂肪</div>
-                                <div class="nutrition-breakdown-value">20g</div>
-                            </div>
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">糖</div>
-                                <div class="nutrition-breakdown-value">12g</div>
-                            </div>
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">纤维</div>
-                                <div class="nutrition-breakdown-value">8g</div>
-                            </div>
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">钠</div>
-                                <div class="nutrition-breakdown-value">850mg</div>
-                            </div>
-                            <div class="nutrition-breakdown-item">
-                                <div class="nutrition-breakdown-name">胆固醇</div>
-                                <div class="nutrition-breakdown-value">120mg</div>
+                            <div class="score-description">
+                                <div class="score-label">Glycemic Load</div>
+                                <div class="score-value">Low</div>
+                                <div class="score-info">
+                                    <button class="info-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Learn More
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="nutrition-summary-section">
-                        <div class="nutrition-summary-section-title">营养均衡评分</div>
-                        <div class="nutrition-metric-item">
-                            <div class="nutrition-metric-value" style="font-size: 24px;">8.5<span class="nutrition-metric-unit">/10</span></div>
-                            <div class="nutrition-metric-name" style="margin-top: 4px;">均衡健康的膳食搭配</div>
+                    <!-- 健康小贴士 -->
+                    <div class="health-tips-section">
+                        <h3 class="section-title">Health Tips</h3>
+                        <div class="health-tip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tip-icon" fill="none" viewBox="0 0 24 24" stroke="#FFBE98">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <p class="tip-text">Select a balanced combination of proteins, healthy fats, and complex carbohydrates for optimal blood sugar control.</p>
                         </div>
                     </div>
                 </div>
@@ -544,9 +564,17 @@
                 const healthyDishes = page.querySelectorAll('.dish-item[data-health="green"] .dish-checkbox');
                 healthyDishes.forEach(checkbox => {
                     checkbox.checked = true;
+                    // 手动触发change事件，确保营养分析功能能够检测到变化
+                    const event = new Event('change', { bubbles: true });
+                    checkbox.dispatchEvent(event);
                 });
                 updateOrderSummary();
                 showToast('Healthy dishes combination selected for you');
+                
+                // 手动触发营养分析更新
+                if (typeof updateSelectedDishes === 'function') {
+                    updateSelectedDishes();
+                }
             });
         }
     }
