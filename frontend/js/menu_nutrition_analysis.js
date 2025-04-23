@@ -117,6 +117,14 @@
             return;
         }
 
+        // 确保引入Tailwind CSS
+        if (!document.querySelector('link[href*="tailwind"]')) {
+            const tailwindLink = document.createElement('link');
+            tailwindLink.rel = 'stylesheet';
+            tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+            document.head.appendChild(tailwindLink);
+        }
+
         // 创建模态框遮罩层
         modalOverlay = document.createElement('div');
         modalOverlay.className = 'modal-overlay';
@@ -139,119 +147,138 @@
             </div>
             
             <div class="modal-content">
+                <div class="health-score-container flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                    <div class="stars-container flex mr-3">
+                        <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
+                            <span class="star text-xl text-gray-200" data-value="1">★</span>
+                            <span class="star text-xl text-gray-200" data-value="2">★</span>
+                            <span class="star text-xl text-gray-200" data-value="3">★</span>
+                            <span class="star text-xl text-gray-200" data-value="4">★</span>
+                            <span class="star text-xl text-gray-200" data-value="5">★</span>
+                        </div>
+                    </div>
+                    <div class="health-score-details flex-1">
+                        <div class="flex items-center mb-1">
+                            <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
+                            <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                        </div>
+                        <p class="score-description text-xs text-gray-600 m-0 leading-relaxed">This meal aligns well with your health profile.</p>
+                    </div>
+                </div>
+                
                 <div class="meal-summary">
                     
-                    <div class="nutrition-overview ios-card">
-                        <div class="calorie-summary">
-                            <div class="calorie-ring-container">
+                    <div class="nutrition-overview flex flex-col gap-5 p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                        <div class="calorie-summary flex items-center justify-around">
+                            <div class="calorie-ring-container relative w-[100px] h-[100px]">
                                 <svg viewBox="0 0 120 120" class="calorie-ring">
                                     <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
                                     <circle cx="60" cy="60" r="54" fill="none" stroke="#FFBE98" stroke-width="12" 
                                         stroke-dasharray="339.292" stroke-dashoffset="254.469" class="calorie-progress"/>
                                 </svg>
-                                <div class="calorie-text">
-                                    <div class="calorie-value">0</div>
-                                    <div class="calorie-label">cal</div>
+                                <div class="calorie-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                                    <div class="calorie-value text-2xl font-bold text-gray-800">0</div>
+                                    <div class="calorie-label text-xs text-gray-500">cal</div>
                                 </div>
                             </div>
-                            <div class="remaining-calories">
-                                <span class="remaining-value">0</span> cal remaining
+                            <div class="remaining-calories text-sm text-gray-600">
+                                <span class="remaining-value font-semibold text-amber-500">0</span> cal remaining
                             </div>
                         </div>
                         
-                        <div class="macro-distribution">
-                            <div class="macro-bar-container">
-                                <div class="macro-bar">
-                                    <div class="macro-segment protein-segment" style="width: 30%"></div>
-                                    <div class="macro-segment carbs-segment" style="width: 45%"></div>
-                                    <div class="macro-segment fat-segment" style="width: 25%"></div>
+                        <div class="macro-distribution flex flex-col gap-3">
+                            <div class="macro-bar-container w-full">
+                                <div class="macro-bar h-3 w-full flex rounded-full overflow-hidden">
+                                    <div class="macro-segment protein-segment bg-green-500" style="width: 30%"></div>
+                                    <div class="macro-segment carbs-segment bg-blue-500" style="width: 45%"></div>
+                                    <div class="macro-segment fat-segment bg-amber-500" style="width: 25%"></div>
                                 </div>
                             </div>
-                            <div class="macro-legend">
-                                <div class="macro-item">
-                                    <div class="macro-color protein-color"></div>
-                                    <div class="macro-name">Protein</div>
-                                    <div class="macro-amount protein-amount">0g</div>
+                            <div class="macro-legend flex justify-between">
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-green-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Protein</div>
+                                    <div class="macro-amount protein-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="macro-item">
-                                    <div class="macro-color carbs-color"></div>
-                                    <div class="macro-name">Carbs</div>
-                                    <div class="macro-amount carbs-amount">0g</div>
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-blue-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Carbs</div>
+                                    <div class="macro-amount carbs-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="macro-item">
-                                    <div class="macro-color fat-color"></div>
-                                    <div class="macro-name">Fat</div>
-                                    <div class="macro-amount fat-amount">0g</div>
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-amber-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Fat</div>
+                                    <div class="macro-amount fat-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="health-insights ios-card">
-                        <h4 class="section-title">Health Insights</h4>
-                        <div class="insights-content">
-                            <div class="insight-metric">
-                                <div class="metric-icon glycemic-icon">
+                    <div class="health-insights p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                        <h4 class="section-title text-base font-semibold text-gray-800 mb-3">Health Insights</h4>
+                        <div class="insights-content flex flex-col gap-4">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-amber-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 12H7L10 19L14 5L17 12H21" stroke="#FFBE98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500 flex items-center gap-1">
                                         <span>Glycemic Load</span>
-                                        <i class="info-icon">i</i>
+                                        <i class="info-icon inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-gray-200 text-white text-[9px] cursor-pointer">i</i>
                                     </div>
-                                    <div class="metric-value glycemic-load-value">0</div>
+                                    <div class="metric-value glycemic-load-value text-sm font-semibold text-gray-700">0</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-indicator low-rating">LOW</div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-indicator low-rating text-xs font-semibold px-1.5 py-0.5 rounded bg-green-100 text-green-700">LOW</div>
                                 </div>
                             </div>
                             
-                            <div class="insight-metric">
-                                <div class="metric-icon fiber-icon">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-green-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5 10C5 8.89543 5.89543 8 7 8H17C18.1046 8 19 8.89543 19 10V14C19 15.1046 18.1046 16 17 16H7C5.89543 16 5 15.1046 5 14V10Z" stroke="#4CAF50" stroke-width="2"/>
                                         <path d="M12 8V6" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
                                         <path d="M12 18V16" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">Fiber</div>
-                                    <div class="metric-value fiber-value">0g</div>
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500">Fiber</div>
+                                    <div class="metric-value fiber-value text-sm font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-progress-bar">
-                                        <div class="rating-progress" style="width: 20%"></div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-progress-bar w-[70px] h-1.5 bg-gray-200 rounded-sm overflow-hidden">
+                                        <div class="rating-progress h-full bg-amber-500" style="width: 20%"></div>
                                     </div>
-                                    <div class="rating-target">of 25g daily target</div>
+                                    <div class="rating-target text-[10px] text-gray-400">of 25g daily target</div>
                                 </div>
                             </div>
                             
-                            <div class="insight-metric">
-                                <div class="metric-icon sodium-icon">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-orange-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4 13.5V12H20V13.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M6.5 8.5L12 4L17.5 8.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M12 4V20" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">Sodium</div>
-                                    <div class="metric-value sodium-value">0mg</div>
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500">Sodium</div>
+                                    <div class="metric-value sodium-value text-sm font-semibold text-gray-700">0mg</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-progress-bar">
-                                        <div class="rating-progress" style="width: 15%"></div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-progress-bar w-[70px] h-1.5 bg-gray-200 rounded-sm overflow-hidden">
+                                        <div class="rating-progress h-full bg-amber-500" style="width: 15%"></div>
                                     </div>
-                                    <div class="rating-target">of 2300mg daily limit</div>
+                                    <div class="rating-target text-[10px] text-gray-400">of 2300mg daily limit</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="action-buttons">
-                        <button class="action-button primary-button" id="add-to-diary-button">
+                    <div class="action-buttons flex gap-3 mb-6 mt-5">
+                        <button class="action-button primary-button flex-1 py-4 rounded-xl text-base font-semibold border-none cursor-pointer flex justify-center items-center text-center max-w-[90%] mx-auto bg-amber-400 text-white shadow-md hover:bg-amber-500 hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-200" id="add-to-diary-button">
                             Add to Log
                         </button>
                     </div>
@@ -263,7 +290,7 @@
                     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
                     max-width: 100%;
                     width: 100%;
-                    overflow-y: auto;
+                    overflow-y: visible;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                 }
                 
@@ -276,6 +303,8 @@
                     transition: transform 0.3s ease-in-out;
                     border-radius: 16px 16px 0 0;
                     z-index: 1001;
+                    max-height: 90vh;
+                    overflow-y: auto;
                 }
                 
                 .bottom-sheet.show {
@@ -320,8 +349,7 @@
                 
                 .modal-content {
                     padding: 16px;
-                    max-height: 75vh;
-                    overflow-y: auto;
+                    overflow-y: visible;
                 }
                 
                 .ios-card {
@@ -1019,6 +1047,10 @@
                 }
             }
             
+            // 计算健康评分
+            let healthScore = calculateHealthScore(selectedDishes);
+            updateHealthScore(healthScore);
+            
             console.log('模态框内容更新完成');
         } catch (error) {
             console.error('更新模态框内容时出错:', error);
@@ -1137,119 +1169,138 @@
             </div>
             
             <div class="modal-content">
+                <div class="health-score-container flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                    <div class="stars-container flex mr-3">
+                        <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
+                            <span class="star text-xl text-gray-200" data-value="1">★</span>
+                            <span class="star text-xl text-gray-200" data-value="2">★</span>
+                            <span class="star text-xl text-gray-200" data-value="3">★</span>
+                            <span class="star text-xl text-gray-200" data-value="4">★</span>
+                            <span class="star text-xl text-gray-200" data-value="5">★</span>
+                        </div>
+                    </div>
+                    <div class="health-score-details flex-1">
+                        <div class="flex items-center mb-1">
+                            <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
+                            <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                        </div>
+                        <p class="score-description text-xs text-gray-600 m-0 leading-relaxed">This meal aligns well with your health profile.</p>
+                    </div>
+                </div>
+                
                 <div class="meal-summary">
                     
-                    <div class="nutrition-overview ios-card">
-                        <div class="calorie-summary">
-                            <div class="calorie-ring-container">
+                    <div class="nutrition-overview flex flex-col gap-5 p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                        <div class="calorie-summary flex items-center justify-around">
+                            <div class="calorie-ring-container relative w-[100px] h-[100px]">
                                 <svg viewBox="0 0 120 120" class="calorie-ring">
                                     <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
                                     <circle cx="60" cy="60" r="54" fill="none" stroke="#FFBE98" stroke-width="12" 
                                         stroke-dasharray="339.292" stroke-dashoffset="254.469" class="calorie-progress"/>
                                 </svg>
-                                <div class="calorie-text">
-                                    <div class="calorie-value">0</div>
-                                    <div class="calorie-label">cal</div>
+                                <div class="calorie-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                                    <div class="calorie-value text-2xl font-bold text-gray-800">0</div>
+                                    <div class="calorie-label text-xs text-gray-500">cal</div>
                                 </div>
                             </div>
-                            <div class="remaining-calories">
-                                <span class="remaining-value">0</span> cal remaining
+                            <div class="remaining-calories text-sm text-gray-600">
+                                <span class="remaining-value font-semibold text-amber-500">0</span> cal remaining
                             </div>
                         </div>
                         
-                        <div class="macro-distribution">
-                            <div class="macro-bar-container">
-                                <div class="macro-bar">
-                                    <div class="macro-segment protein-segment" style="width: 30%"></div>
-                                    <div class="macro-segment carbs-segment" style="width: 45%"></div>
-                                    <div class="macro-segment fat-segment" style="width: 25%"></div>
+                        <div class="macro-distribution flex flex-col gap-3">
+                            <div class="macro-bar-container w-full">
+                                <div class="macro-bar h-3 w-full flex rounded-full overflow-hidden">
+                                    <div class="macro-segment protein-segment bg-green-500" style="width: 30%"></div>
+                                    <div class="macro-segment carbs-segment bg-blue-500" style="width: 45%"></div>
+                                    <div class="macro-segment fat-segment bg-amber-500" style="width: 25%"></div>
                                 </div>
                             </div>
-                            <div class="macro-legend">
-                                <div class="macro-item">
-                                    <div class="macro-color protein-color"></div>
-                                    <div class="macro-name">Protein</div>
-                                    <div class="macro-amount protein-amount">0g</div>
+                            <div class="macro-legend flex justify-between">
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-green-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Protein</div>
+                                    <div class="macro-amount protein-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="macro-item">
-                                    <div class="macro-color carbs-color"></div>
-                                    <div class="macro-name">Carbs</div>
-                                    <div class="macro-amount carbs-amount">0g</div>
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-blue-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Carbs</div>
+                                    <div class="macro-amount carbs-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="macro-item">
-                                    <div class="macro-color fat-color"></div>
-                                    <div class="macro-name">Fat</div>
-                                    <div class="macro-amount fat-amount">0g</div>
+                                <div class="macro-item flex items-center gap-1.5">
+                                    <div class="macro-color w-3 h-3 rounded-sm bg-amber-500"></div>
+                                    <div class="macro-name text-xs text-gray-500">Fat</div>
+                                    <div class="macro-amount fat-amount text-xs font-semibold text-gray-700">0g</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="health-insights ios-card">
-                        <h4 class="section-title">Health Insights</h4>
-                        <div class="insights-content">
-                            <div class="insight-metric">
-                                <div class="metric-icon glycemic-icon">
+                    <div class="health-insights p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                        <h4 class="section-title text-base font-semibold text-gray-800 mb-3">Health Insights</h4>
+                        <div class="insights-content flex flex-col gap-4">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-amber-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 12H7L10 19L14 5L17 12H21" stroke="#FFBE98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500 flex items-center gap-1">
                                         <span>Glycemic Load</span>
-                                        <i class="info-icon">i</i>
+                                        <i class="info-icon inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-gray-200 text-white text-[9px] cursor-pointer">i</i>
                                     </div>
-                                    <div class="metric-value glycemic-load-value">0</div>
+                                    <div class="metric-value glycemic-load-value text-sm font-semibold text-gray-700">0</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-indicator low-rating">LOW</div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-indicator low-rating text-xs font-semibold px-1.5 py-0.5 rounded bg-green-100 text-green-700">LOW</div>
                                 </div>
                             </div>
                             
-                            <div class="insight-metric">
-                                <div class="metric-icon fiber-icon">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-green-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5 10C5 8.89543 5.89543 8 7 8H17C18.1046 8 19 8.89543 19 10V14C19 15.1046 18.1046 16 17 16H7C5.89543 16 5 15.1046 5 14V10Z" stroke="#4CAF50" stroke-width="2"/>
                                         <path d="M12 8V6" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
                                         <path d="M12 18V16" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">Fiber</div>
-                                    <div class="metric-value fiber-value">0g</div>
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500">Fiber</div>
+                                    <div class="metric-value fiber-value text-sm font-semibold text-gray-700">0g</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-progress-bar">
-                                        <div class="rating-progress" style="width: 20%"></div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-progress-bar w-[70px] h-1.5 bg-gray-200 rounded-sm overflow-hidden">
+                                        <div class="rating-progress h-full bg-amber-500" style="width: 20%"></div>
                                     </div>
-                                    <div class="rating-target">of 25g daily target</div>
+                                    <div class="rating-target text-[10px] text-gray-400">of 25g daily target</div>
                                 </div>
                             </div>
                             
-                            <div class="insight-metric">
-                                <div class="metric-icon sodium-icon">
+                            <div class="insight-metric flex items-center gap-3">
+                                <div class="metric-icon w-8 h-8 flex items-center justify-center rounded-lg bg-orange-100">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4 13.5V12H20V13.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M6.5 8.5L12 4L17.5 8.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M12 4V20" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <div class="metric-info">
-                                    <div class="metric-name">Sodium</div>
-                                    <div class="metric-value sodium-value">0mg</div>
+                                <div class="metric-info flex-1">
+                                    <div class="metric-name text-xs text-gray-500">Sodium</div>
+                                    <div class="metric-value sodium-value text-sm font-semibold text-gray-700">0mg</div>
                                 </div>
-                                <div class="metric-rating">
-                                    <div class="rating-progress-bar">
-                                        <div class="rating-progress" style="width: 15%"></div>
+                                <div class="metric-rating flex flex-col items-end gap-1">
+                                    <div class="rating-progress-bar w-[70px] h-1.5 bg-gray-200 rounded-sm overflow-hidden">
+                                        <div class="rating-progress h-full bg-amber-500" style="width: 15%"></div>
                                     </div>
-                                    <div class="rating-target">of 2300mg daily limit</div>
+                                    <div class="rating-target text-[10px] text-gray-400">of 2300mg daily limit</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="action-buttons">
-                        <button class="action-button primary-button" id="add-to-diary-button">
+                    <div class="action-buttons flex gap-3 mb-6 mt-5">
+                        <button class="action-button primary-button flex-1 py-4 rounded-xl text-base font-semibold border-none cursor-pointer flex justify-center items-center text-center max-w-[90%] mx-auto bg-amber-400 text-white shadow-md hover:bg-amber-500 hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-200" id="add-to-diary-button">
                             Add to Log
                         </button>
                     </div>
@@ -1261,7 +1312,7 @@
                     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
                     max-width: 100%;
                     width: 100%;
-                    overflow-y: auto;
+                    overflow-y: visible;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                 }
                 
@@ -1274,6 +1325,8 @@
                     transition: transform 0.3s ease-in-out;
                     border-radius: 16px 16px 0 0;
                     z-index: 1001;
+                    max-height: 90vh;
+                    overflow-y: auto;
                 }
                 
                 .bottom-sheet.show {
@@ -1318,8 +1371,7 @@
                 
                 .modal-content {
                     padding: 16px;
-                    max-height: 75vh;
-                    overflow-y: auto;
+                    overflow-y: visible;
                 }
                 
                 .ios-card {
@@ -2028,4 +2080,209 @@
 
     // 页面加载完成后初始化
     document.addEventListener('DOMContentLoaded', initEventListeners);
+
+    // 添加健康评分计算和更新函数
+    /**
+     * 计算健康评分
+     * @function
+     * @param {Array} dishes - 选中的菜品数组
+     * @returns {Object} 包含健康评分值和描述的对象
+     */
+    function calculateHealthScore(dishes) {
+        // 基础分数
+        let baseScore = 75;
+        
+        // 健康评分影响因素
+        let proteinQuality = 0;
+        let carbQuality = 0;
+        let fatQuality = 0;
+        let micronutrientScore = 0;
+        
+        // 根据菜品健康标签调整分数
+        let greenCount = 0;
+        let yellowCount = 0;
+        let redCount = 0;
+        
+        dishes.forEach(dish => {
+            if (dish.health === 'green') {
+                greenCount++;
+            } else if (dish.health === 'yellow') {
+                yellowCount++;
+            } else if (dish.health === 'red') {
+                redCount++;
+            }
+            
+            // 基于蛋白质含量添加分数
+            if (dish.protein > 20) {
+                proteinQuality += 2;
+            }
+            
+            // 基于血糖负荷扣分
+            if (dish.glycemicLoad > 20) {
+                carbQuality -= 3;
+            } else if (dish.glycemicLoad < 10) {
+                carbQuality += 2;
+            }
+            
+            // 根据膳食纤维添加分数
+            if (dish.fiber > 3) {
+                micronutrientScore += 2;
+            }
+        });
+        
+        // 根据菜品健康标签比例计算最终分数
+        let totalDishes = dishes.length;
+        let finalScore = baseScore;
+        
+        finalScore += (greenCount / totalDishes) * 15;
+        finalScore += (yellowCount / totalDishes) * 0;
+        finalScore -= (redCount / totalDishes) * 15;
+        
+        // 添加其他因素的分数
+        finalScore += proteinQuality;
+        finalScore += carbQuality;
+        finalScore += fatQuality;
+        finalScore += micronutrientScore;
+        
+        // 确保分数在0-100范围内
+        finalScore = Math.max(0, Math.min(100, Math.round(finalScore)));
+        
+        // 确定评分描述
+        let scoreTitle = '';
+        let scoreDescription = '';
+        
+        if (finalScore >= 85) {
+            scoreTitle = 'Excellent Match';
+            scoreDescription = 'This meal is perfectly balanced for your health profile and nutrition goals.';
+        } else if (finalScore >= 70) {
+            scoreTitle = 'Good Match';
+            scoreDescription = 'This meal aligns well with your health profile, supporting your nutritional goals.';
+        } else if (finalScore >= 50) {
+            scoreTitle = 'Moderate Match';
+            scoreDescription = 'This meal is acceptable for your health profile but could be improved.';
+        } else {
+            scoreTitle = 'Poor Match';
+            scoreDescription = 'This meal may not align with your health goals. Consider adjusting your selection.';
+        }
+        
+        return {
+            score: finalScore,
+            title: scoreTitle,
+            description: scoreDescription
+        };
+    }
+
+    /**
+     * 更新健康评分显示
+     * @function
+     * @param {Object} healthScore - 健康评分对象
+     */
+    function updateHealthScore(healthScore) {
+        const scoreTitleElement = document.querySelector('.score-title');
+        const scoreDescriptionElement = document.querySelector('.score-description');
+        const starsContainer = document.querySelector('.stars-container');
+        const scoreBadge = document.querySelector('.score-badge');
+        
+        if (scoreTitleElement) {
+            scoreTitleElement.textContent = healthScore.title;
+        }
+        
+        if (scoreDescriptionElement) {
+            // 简化评分描述
+            const simpleDescriptions = {
+                'Excellent Match': 'Perfect for your health profile.',
+                'Good Match': 'Aligns well with your health profile.',
+                'Moderate Match': 'Acceptable for your health needs.',
+                'Poor Match': 'Consider adjusting your selection.'
+            };
+            
+            scoreDescriptionElement.textContent = simpleDescriptions[healthScore.title] || healthScore.description;
+        }
+        
+        // 设置评分等级徽章
+        if (scoreBadge) {
+            let badgeClasses = '';
+            let badgeText = '';
+            
+            if (healthScore.score >= 85) {
+                badgeClasses = 'bg-green-100 text-green-800';
+                badgeText = 'Excellent';
+            } else if (healthScore.score >= 70) {
+                badgeClasses = 'bg-amber-100 text-amber-800';
+                badgeText = 'Good';
+            } else if (healthScore.score >= 50) {
+                badgeClasses = 'bg-yellow-100 text-yellow-800';
+                badgeText = 'Moderate';
+            } else {
+                badgeClasses = 'bg-red-100 text-red-800';
+                badgeText = 'Poor';
+            }
+            
+            // 移除所有可能的颜色类
+            scoreBadge.className = 'ml-2 px-2 py-1 rounded-full text-xs font-medium bg-opacity-10 score-badge';
+            // 添加新的颜色类
+            scoreBadge.classList.add(...badgeClasses.split(' '));
+            scoreBadge.textContent = badgeText;
+        }
+        
+        if (starsContainer) {
+            // 将 0-100 的评分转换为 0-5 星
+            const starRating = (healthScore.score / 100) * 5;
+            const stars = starsContainer.querySelectorAll('.star');
+            
+            // 重置所有星星
+            stars.forEach(star => {
+                star.className = 'star text-2xl text-gray-200';
+            });
+            
+            // 设置星星颜色
+            let starColor = 'text-amber-400'; // 默认星星颜色
+            
+            if (healthScore.score < 50) {
+                starColor = 'text-red-500'; // 红色（差）
+            } else if (healthScore.score < 70) {
+                starColor = 'text-yellow-500'; // 黄色（中）
+            } else if (healthScore.score >= 85) {
+                starColor = 'text-green-500'; // 绿色（优）
+            }
+            
+            // 填充星星
+            stars.forEach((star, index) => {
+                const starValue = parseInt(star.getAttribute('data-value'));
+                
+                if (starValue <= Math.floor(starRating)) {
+                    // 完全填充
+                    star.classList.remove('text-gray-200');
+                    star.classList.add(starColor);
+                } else if (starValue === Math.ceil(starRating) && starRating % 1 > 0) {
+                    // 处理半星情况 - 这需要特殊处理，因为Tailwind没有直接的半星样式
+                    // 这里我们使用伪元素或特殊技巧创建半星效果
+                    star.classList.remove('text-gray-200');
+                    star.classList.add('relative', 'overflow-hidden');
+                    
+                    // 创建一个自定义属性，然后用CSS变量处理半星效果
+                    star.style.background = `linear-gradient(to right, ${getColorHex(starColor)} 50%, #E5E7EB 50%)`;
+                    star.style.webkitBackgroundClip = 'text';
+                    star.style.backgroundClip = 'text';
+                    star.style.color = 'transparent';
+                }
+            });
+        }
+    }
+
+    /**
+     * 将Tailwind颜色类转换为十六进制颜色代码
+     * @param {string} colorClass - Tailwind颜色类名
+     * @returns {string} 十六进制颜色代码
+     */
+    function getColorHex(colorClass) {
+        const colorMap = {
+            'text-amber-400': '#FBBF24',
+            'text-red-500': '#EF4444',
+            'text-yellow-500': '#F59E0B',
+            'text-green-500': '#10B981'
+        };
+        
+        return colorMap[colorClass] || '#FBBF24'; // 默认返回amber颜色
+    }
 })(); 
