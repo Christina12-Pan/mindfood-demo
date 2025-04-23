@@ -126,60 +126,550 @@
         nutritionSummaryModal = document.createElement('div');
         nutritionSummaryModal.className = 'nutrition-summary-modal';
         nutritionSummaryModal.innerHTML = `
+            <div class="modal-handle"></div>
             <div class="modal-header">
-                <h3>营养分析</h3>
-                <button class="close-btn">&times;</button>
+                <div class="modal-title">
+                    <h3>Meal Nutrition</h3>
+                </div>
+                <button id="close-nutrition-modal" class="close-button ios-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
+            
             <div class="modal-content">
-                <div class="total-values">
-                    <div class="total-calories">
-                        <h4>总热量</h4>
-                        <p class="value">0</p>
-                        <p class="unit">卡路里</p>
+                <div class="meal-summary">
+                    
+                    <div class="nutrition-overview ios-card">
+                        <div class="calorie-summary">
+                            <div class="calorie-ring-container">
+                                <svg viewBox="0 0 120 120" class="calorie-ring">
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#FFBE98" stroke-width="12" 
+                                        stroke-dasharray="339.292" stroke-dashoffset="254.469" class="calorie-progress"/>
+                                </svg>
+                                <div class="calorie-text">
+                                    <div class="calorie-value">0</div>
+                                    <div class="calorie-label">cal</div>
+                                </div>
+                            </div>
+                            <div class="remaining-calories">
+                                <span class="remaining-value">0</span> cal remaining
+                            </div>
+                        </div>
+                        
+                        <div class="macro-distribution">
+                            <div class="macro-bar-container">
+                                <div class="macro-bar">
+                                    <div class="macro-segment protein-segment" style="width: 30%"></div>
+                                    <div class="macro-segment carbs-segment" style="width: 45%"></div>
+                                    <div class="macro-segment fat-segment" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="macro-legend">
+                                <div class="macro-item">
+                                    <div class="macro-color protein-color"></div>
+                                    <div class="macro-name">Protein</div>
+                                    <div class="macro-amount protein-amount">0g</div>
+                                </div>
+                                <div class="macro-item">
+                                    <div class="macro-color carbs-color"></div>
+                                    <div class="macro-name">Carbs</div>
+                                    <div class="macro-amount carbs-amount">0g</div>
+                                </div>
+                                <div class="macro-item">
+                                    <div class="macro-color fat-color"></div>
+                                    <div class="macro-name">Fat</div>
+                                    <div class="macro-amount fat-amount">0g</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="glycemic-info">
-                        <div class="glycemic-load">
-                            <h4>血糖负荷 <i class="info-icon">i</i></h4>
-                            <p class="value">0</p>
-                            <p class="unit">GL</p>
-                        </div>
-                        <div class="glycemic-index">
-                            <h4>平均血糖指数</h4>
-                            <p class="value">0</p>
-                            <p class="unit">GI</p>
+                    
+                    <div class="health-insights ios-card">
+                        <h4 class="section-title">Health Insights</h4>
+                        <div class="insights-content">
+                            <div class="insight-metric">
+                                <div class="metric-icon glycemic-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 12H7L10 19L14 5L17 12H21" stroke="#FFBE98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">
+                                        <span>Glycemic Load</span>
+                                        <i class="info-icon">i</i>
+                                    </div>
+                                    <div class="metric-value glycemic-load-value">0</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-indicator low-rating">LOW</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-metric">
+                                <div class="metric-icon fiber-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 10C5 8.89543 5.89543 8 7 8H17C18.1046 8 19 8.89543 19 10V14C19 15.1046 18.1046 16 17 16H7C5.89543 16 5 15.1046 5 14V10Z" stroke="#4CAF50" stroke-width="2"/>
+                                        <path d="M12 8V6" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M12 18V16" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">Fiber</div>
+                                    <div class="metric-value fiber-value">0g</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-progress-bar">
+                                        <div class="rating-progress" style="width: 20%"></div>
+                                    </div>
+                                    <div class="rating-target">of 25g daily target</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-metric">
+                                <div class="metric-icon sodium-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 13.5V12H20V13.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M6.5 8.5L12 4L17.5 8.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 4V20" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">Sodium</div>
+                                    <div class="metric-value sodium-value">0mg</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-progress-bar">
+                                        <div class="rating-progress" style="width: 15%"></div>
+                                    </div>
+                                    <div class="rating-target">of 2300mg daily limit</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="macros">
-                    <div class="macro protein">
-                        <div class="macro-label">
-                            <span class="macro-name">蛋白质</span>
-                            <span class="macro-value">0g</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 0%; background-color: #4CAF50;"></div>
-                        </div>
-                    </div>
-                    <div class="macro carbs">
-                        <div class="macro-label">
-                            <span class="macro-name">碳水化合物</span>
-                            <span class="macro-value">0g</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 0%; background-color: #2196F3;"></div>
-                        </div>
-                    </div>
-                    <div class="macro fat">
-                        <div class="macro-label">
-                            <span class="macro-name">脂肪</span>
-                            <span class="macro-value">0g</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 0%; background-color: #FF9800;"></div>
-                        </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-button primary-button" id="add-to-diary-button">
+                            Add to Log
+                        </button>
                     </div>
                 </div>
             </div>
+            <style>
+                .ios-style {
+                    background-color: #FFFFFF;
+                    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+                    max-width: 100%;
+                    width: 100%;
+                    overflow-y: auto;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                }
+                
+                .bottom-sheet {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease-in-out;
+                    border-radius: 16px 16px 0 0;
+                    z-index: 1001;
+                }
+                
+                .bottom-sheet.show {
+                    transform: translateY(0);
+                }
+                
+                .modal-handle {
+                    width: 36px;
+                    height: 5px;
+                    background-color: #DDD;
+                    border-radius: 3px;
+                    margin: 12px auto 8px;
+                }
+                
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 4px 20px 16px;
+                    border-bottom: 1px solid #F0F0F0;
+                }
+                
+                .modal-title {
+                    text-align: center;
+                    flex: 1;
+                }
+                
+                .modal-title h3 {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #000000;
+                }
+                
+                .ios-close {
+                    background: none;
+                    border: none;
+                    padding: 4px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+                
+                .modal-content {
+                    padding: 16px;
+                    max-height: 75vh;
+                    overflow-y: auto;
+                }
+                
+                .ios-card {
+                    background-color: #F9F9F9;
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    border: 1px solid #EEEEEE;
+                }
+                
+                .meal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 16px;
+                }
+                
+                .meal-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .meal-time {
+                    font-size: 14px;
+                    padding: 4px 10px;
+                    background-color: #FFBE98;
+                    color: white;
+                    border-radius: 12px;
+                    font-weight: 500;
+                }
+                
+                .nutrition-overview {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                
+                .calorie-summary {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+                
+                .calorie-ring-container {
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                }
+                
+                .calorie-text {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                }
+                
+                .calorie-value {
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #000;
+                    line-height: 1;
+                }
+                
+                .calorie-label {
+                    font-size: 14px;
+                    color: #888;
+                }
+                
+                .remaining-calories {
+                    font-size: 16px;
+                    color: #555;
+                }
+                
+                .remaining-value {
+                    font-weight: 600;
+                    color: #FFBE98;
+                }
+                
+                .macro-distribution {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                
+                .macro-bar-container {
+                    width: 100%;
+                }
+                
+                .macro-bar {
+                    height: 12px;
+                    width: 100%;
+                    display: flex;
+                    border-radius: 6px;
+                    overflow: hidden;
+                }
+                
+                .macro-segment {
+                    height: 100%;
+                }
+                
+                .protein-segment {
+                    background-color: #4CAF50;
+                }
+                
+                .carbs-segment {
+                    background-color: #2196F3;
+                }
+                
+                .fat-segment {
+                    background-color: #FFBE98;
+                }
+                
+                .macro-legend {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                .macro-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                }
+                
+                .macro-color {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 2px;
+                }
+                
+                .protein-color {
+                    background-color: #4CAF50;
+                }
+                
+                .carbs-color {
+                    background-color: #2196F3;
+                }
+                
+                .fat-color {
+                    background-color: #FFBE98;
+                }
+                
+                .macro-name {
+                    font-size: 13px;
+                    color: #555;
+                }
+                
+                .macro-amount {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .section-title {
+                    margin: 0 0 14px 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .insights-content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                
+                .insight-metric {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+                
+                .metric-icon {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .glycemic-icon {
+                    background-color: rgba(255, 190, 152, 0.15);
+                }
+                
+                .fiber-icon {
+                    background-color: rgba(76, 175, 80, 0.15);
+                }
+                
+                .sodium-icon {
+                    background-color: rgba(255, 152, 0, 0.15);
+                }
+                
+                .metric-info {
+                    flex: 1;
+                }
+                
+                .metric-name {
+                    font-size: 14px;
+                    color: #555;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                }
+                
+                .metric-value {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .info-icon {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    background-color: #DDD;
+                    color: white;
+                    font-size: 9px;
+                    font-style: normal;
+                    cursor: pointer;
+                }
+                
+                .metric-rating {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 4px;
+                }
+                
+                .rating-indicator {
+                    font-size: 11px;
+                    font-weight: 600;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                }
+                
+                .low-rating {
+                    background-color: #EEFBEE;
+                    color: #4CAF50;
+                }
+                
+                .medium-rating {
+                    background-color: #FFF8E1;
+                    color: #FFC107;
+                }
+                
+                .high-rating {
+                    background-color: #FFEBEE;
+                    color: #F44336;
+                }
+                
+                .rating-progress-bar {
+                    width: 70px;
+                    height: 6px;
+                    background-color: #EEEEEE;
+                    border-radius: 3px;
+                    overflow: hidden;
+                }
+                
+                .rating-progress {
+                    height: 100%;
+                    background-color: #FFBE98;
+                }
+                
+                .rating-target {
+                    font-size: 10px;
+                    color: #888;
+                }
+                
+                .selected-dishes {
+                    padding-bottom: 8px;
+                }
+                
+                .dishes-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    max-height: 180px;
+                    overflow-y: auto;
+                }
+                
+                .action-buttons {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 24px;
+                    margin-top: 20px;
+                }
+                
+                .action-button {
+                    flex: 1;
+                    padding: 16px 0;
+                    border-radius: 12px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border: none;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    max-width: 90%;
+                    margin: 0 auto;
+                }
+                
+                .primary-button {
+                    background-color: #FFBE98;
+                    color: white;
+                    box-shadow: 0 2px 5px rgba(255, 190, 152, 0.3);
+                    transition: all 0.2s ease;
+                }
+                
+                .primary-button:hover {
+                    background-color: #FFA87D;
+                    transform: translateY(-1px);
+                }
+                
+                .primary-button:active {
+                    transform: translateY(1px);
+                    box-shadow: 0 1px 2px rgba(255, 190, 152, 0.3);
+                }
+                
+                .secondary-button {
+                    background-color: #F5F5F5;
+                    color: #333;
+                    border: 1px solid #DDDDDD;
+                }
+                
+                .modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    backdrop-filter: blur(4px);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    z-index: 1000;
+                }
+                
+                .modal-overlay.show {
+                    opacity: 1;
+                }
+            </style>
         `;
         document.querySelector('.menu-recognition-container').appendChild(nutritionSummaryModal);
 
@@ -299,6 +789,11 @@
                     protein: Math.floor(Math.random() * 20) + 5,
                     carbs: Math.floor(Math.random() * 40) + 10,
                     fat: Math.floor(Math.random() * 15) + 2,
+                    gi: dishHealth === 'green' ? 
+                        Math.floor(Math.random() * 15) + 40 : // 低GI (40-55)
+                        (dishHealth === 'yellow' ? 
+                            Math.floor(Math.random() * 15) + 56 : // 中GI (56-70)
+                            Math.floor(Math.random() * 15) + 71), // 高GI (71-85)
                     glycemicLoad: dishHealth === 'green' ? 
                         Math.floor(Math.random() * 5) + 1 : 
                         (dishHealth === 'yellow' ? 
@@ -397,97 +892,130 @@
             let totalCarbs = 0;
             let totalFat = 0;
             let totalGL = 0;
+            let totalFiber = 0;
+            let totalSodium = 0;
             let weightedGI = 0;
             let totalCarbsForGI = 0;
             
-            // 更新已选菜品列表
-            const dishesList = document.getElementById('selected-dishes-list');
-            if (dishesList) {
-                let html = '';
-                selectedDishes.forEach(dish => {
-                    // 累加营养值
-                    totalCalories += dish.calories || 0;
-                    totalProtein += dish.protein || 0;
-                    totalCarbs += dish.carbs || 0;
-                    totalFat += dish.fat || 0;
-                    
-                    // 计算血糖负荷
-                    const dishGL = ((dish.gi || 0) * (dish.carbs || 0)) / 100;
-                    totalGL += dishGL;
-                    
-                    // 计算加权血糖指数
-                    if (dish.carbs > 0 && dish.gi > 0) {
-                        weightedGI += (dish.gi * dish.carbs);
-                        totalCarbsForGI += dish.carbs;
-                    }
-                    
-                    // 生成菜品HTML
-                    html += `
-                        <div class="selected-dish-item">
-                            <div class="dish-info">
-                                <div class="dish-name">${dish.name}</div>
-                                <div class="dish-quantity">1份</div>
-                            </div>
-                            <div class="dish-calories">${dish.calories || 0} 卡路里</div>
-                        </div>
-                    `;
-                });
-                dishesList.innerHTML = html;
-            }
+            // 每日推荐摄入值
+            const dailyCalories = 2000; // 标准每日推荐摄入量
+            const dailyFiber = 25; // 标准每日膳食纤维摄入量(g)
+            const dailySodium = 2300; // 标准每日钠摄入限制(mg)
+            
+            // 累加营养值
+            selectedDishes.forEach(dish => {
+                // 累加基本营养值
+                totalCalories += dish.calories || 0;
+                totalProtein += dish.protein || 0;
+                totalCarbs += dish.carbs || 0;
+                totalFat += dish.fat || 0;
+                
+                // 累加其他营养成分
+                totalFiber += dish.fiber || 0;
+                totalSodium += dish.sodium || 0;
+                
+                // 计算血糖负荷
+                const dishGL = ((dish.gi || 0) * (dish.carbs || 0)) / 100;
+                totalGL += dishGL;
+                
+                // 计算加权血糖指数
+                if (dish.carbs > 0 && dish.gi > 0) {
+                    weightedGI += (dish.gi * dish.carbs);
+                    totalCarbsForGI += dish.carbs;
+                }
+            });
             
             // 计算平均血糖指数
             const avgGI = totalCarbsForGI > 0 ? Math.round(weightedGI / totalCarbsForGI) : 0;
             
-            // 更新总卡路里
-            const caloriesElement = document.querySelector('.total-calories .value');
-            if (caloriesElement) {
-                caloriesElement.textContent = Math.round(totalCalories);
+            // 计算卡路里占每日摄入量的百分比
+            const caloriesPercent = Math.round((totalCalories / dailyCalories) * 100);
+            const remainingCalories = dailyCalories - totalCalories;
+            
+            // 计算宏量营养素百分比
+            const totalMacros = totalProtein + totalCarbs + totalFat;
+            const proteinPercent = totalMacros > 0 ? Math.round((totalProtein / totalMacros) * 100) : 0;
+            const carbsPercent = totalMacros > 0 ? Math.round((totalCarbs / totalMacros) * 100) : 0;
+            const fatPercent = totalMacros > 0 ? Math.round((totalFat / totalMacros) * 100) : 0;
+            
+            // 更新卡路里显示
+            const calorieValueElement = document.querySelector('.calorie-value');
+            const remainingCaloriesElement = document.querySelector('.remaining-value');
+            const calorieProgressElement = document.querySelector('.calorie-progress');
+            
+            if (calorieValueElement) {
+                calorieValueElement.textContent = Math.round(totalCalories);
             }
             
-            // 更新宏量营养素
-            updateMacronutrient('protein', totalProtein, nutritionData.proteinPercent);
-            updateMacronutrient('carbs', totalCarbs, nutritionData.carbsPercent);
-            updateMacronutrient('fat', totalFat, nutritionData.fatPercent);
+            if (remainingCaloriesElement) {
+                remainingCaloriesElement.textContent = Math.max(0, Math.round(remainingCalories));
+            }
+            
+            if (calorieProgressElement) {
+                // 更新圆环进度
+                const circumference = 2 * Math.PI * 54;
+                const percent = Math.min(caloriesPercent, 100) / 100;
+                const offset = circumference * (1 - percent);
+                
+                calorieProgressElement.style.strokeDashoffset = offset;
+                
+                // 根据占比调整颜色
+                let caloriesColor = '#4ECDC4'; // 绿色（低）
+                if (caloriesPercent > 50) {
+                    caloriesColor = caloriesPercent > 75 ? '#F44336' : '#FFC107'; // 红色（高）或黄色（中）
+                }
+                
+                calorieProgressElement.style.stroke = caloriesColor;
+            }
+            
+            // 更新宏量营养素分布
+            updateMacroDistribution(proteinPercent, carbsPercent, fatPercent, totalProtein, totalCarbs, totalFat);
             
             // 更新血糖负荷
-            const chartText = document.querySelector('.chart-text');
-            const chartValue = document.querySelector('.chart-value');
-            const scoreValue = document.querySelector('.score-value');
+            const glycemicLoadElement = document.querySelector('.glycemic-load-value');
+            const glycemicRatingElement = document.querySelector('.rating-indicator');
             
-            if (chartText) {
-                chartText.textContent = Math.round(totalGL);
-            }
-            
-            if (chartValue) {
-                // 计算圆环进度
-                const circumference = 2 * Math.PI * 45;
-                const maxValue = 30;
-                const value = Math.min(totalGL, maxValue);
-                const percent = value / maxValue;
-                const offset = circumference - (percent * circumference);
+            if (glycemicLoadElement) {
+                glycemicLoadElement.textContent = Math.round(totalGL);
                 
-                chartValue.setAttribute('stroke-dasharray', `${circumference - offset}, ${offset}`);
-                
-                // 根据负荷值设置颜色
-                if (totalGL <= 10) {
-                    chartValue.setAttribute('stroke', '#4ECDC4'); // 绿色
-                } else if (totalGL <= 20) {
-                    chartValue.setAttribute('stroke', '#FFD166'); // 黄色
-                } else {
-                    chartValue.setAttribute('stroke', '#FF6B6B'); // 红色
+                // 根据负荷值设置评级
+                if (glycemicRatingElement) {
+                    if (totalGL <= 10) {
+                        glycemicRatingElement.textContent = 'LOW';
+                        glycemicRatingElement.className = 'rating-indicator low-rating';
+                    } else if (totalGL <= 20) {
+                        glycemicRatingElement.textContent = 'MEDIUM';
+                        glycemicRatingElement.className = 'rating-indicator medium-rating';
+                    } else {
+                        glycemicRatingElement.textContent = 'HIGH';
+                        glycemicRatingElement.className = 'rating-indicator high-rating';
+                    }
                 }
             }
             
-            if (scoreValue) {
-                scoreValue.textContent = nutritionData.glycemicCategory;
+            // 更新膳食纤维
+            const fiberValueElement = document.querySelector('.fiber-value');
+            const fiberProgressElement = document.querySelector('.insight-metric:nth-child(2) .rating-progress');
+            
+            if (fiberValueElement) {
+                fiberValueElement.textContent = `${totalFiber.toFixed(1)}g`;
                 
-                // 根据类别设置颜色
-                if (nutritionData.glycemicCategory === '低') {
-                    scoreValue.style.color = '#4ECDC4'; // 绿色
-                } else if (nutritionData.glycemicCategory === '中') {
-                    scoreValue.style.color = '#FFD166'; // 黄色
-                } else {
-                    scoreValue.style.color = '#FF6B6B'; // 红色
+                if (fiberProgressElement) {
+                    const fiberPercent = Math.min(100, (totalFiber / dailyFiber) * 100);
+                    fiberProgressElement.style.width = `${fiberPercent}%`;
+                }
+            }
+            
+            // 更新钠含量
+            const sodiumValueElement = document.querySelector('.sodium-value');
+            const sodiumProgressElement = document.querySelector('.insight-metric:nth-child(3) .rating-progress');
+            
+            if (sodiumValueElement) {
+                sodiumValueElement.textContent = `${Math.round(totalSodium)}mg`;
+                
+                if (sodiumProgressElement) {
+                    const sodiumPercent = Math.min(100, (totalSodium / dailySodium) * 100);
+                    sodiumProgressElement.style.width = `${sodiumPercent}%`;
                 }
             }
             
@@ -498,25 +1026,36 @@
     }
     
     /**
-     * 更新宏量营养素显示
+     * 更新宏量营养素分布
      */
-    function updateMacronutrient(type, amount, percent) {
-        const amountElement = document.querySelector(`.macro-item:has(.name:contains(${type === 'protein' ? '蛋白质' : type === 'carbs' ? '碳水化合物' : '脂肪'})) .amount`);
-        const barElement = document.querySelector(`.macro-bar.${type}`);
+    function updateMacroDistribution(proteinPercent, carbsPercent, fatPercent, proteinGrams, carbsGrams, fatGrams) {
+        // 更新宏量营养素条形图
+        const proteinSegment = document.querySelector('.protein-segment');
+        const carbsSegment = document.querySelector('.carbs-segment');
+        const fatSegment = document.querySelector('.fat-segment');
         
-        if (!amountElement || !barElement) {
-            const alternativeAmount = document.querySelector(`.macro-item .amount`);
-            const alternativeBar = document.querySelector(`.macro-item .macro-bar`);
-            
-            if (alternativeAmount && alternativeBar) {
-                alternativeAmount.textContent = `${amount}g`;
-                alternativeBar.style.width = `${percent}%`;
-            }
-            return;
+        if (proteinSegment && carbsSegment && fatSegment) {
+            proteinSegment.style.width = `${proteinPercent}%`;
+            carbsSegment.style.width = `${carbsPercent}%`;
+            fatSegment.style.width = `${fatPercent}%`;
         }
         
-        amountElement.textContent = `${amount}g`;
-        barElement.style.width = `${percent}%`;
+        // 更新宏量营养素数值
+        const proteinAmount = document.querySelector('.protein-amount');
+        const carbsAmount = document.querySelector('.carbs-amount');
+        const fatAmount = document.querySelector('.fat-amount');
+        
+        if (proteinAmount) {
+            proteinAmount.textContent = `${Math.round(proteinGrams)}g`;
+        }
+        
+        if (carbsAmount) {
+            carbsAmount.textContent = `${Math.round(carbsGrams)}g`;
+        }
+        
+        if (fatAmount) {
+            fatAmount.textContent = `${Math.round(fatGrams)}g`;
+        }
     }
     
     /**
@@ -531,7 +1070,7 @@
         
         if (selectedDishes.length === 0) {
             // 显示提示消息
-            showToast("请至少选择一道菜品进行营养分析");
+            showToast("Please select at least one dish for nutrition analysis");
             return;
         }
         
@@ -539,6 +1078,9 @@
         
         // 更新模态框内容
         updateModalContent(selectedDishes);
+        
+        // 设置按钮事件
+        setupActionButtons();
         
         // 显示模态框
         modalOverlay.classList.add('show');
@@ -564,77 +1106,571 @@
             return;
         }
         
+        // 获取菜单识别容器作为模态框的父容器
+        const menuContainer = document.querySelector('.menu-recognition-container');
+        if (!menuContainer) {
+            console.error('无法找到菜单识别容器');
+            return;
+        }
+        
         // 创建模态框遮罩层
         modalOverlay = document.createElement('div');
         modalOverlay.id = 'nutrition-overlay';
         modalOverlay.className = 'modal-overlay';
-        document.querySelector('.menu-recognition-container').appendChild(modalOverlay);
+        menuContainer.appendChild(modalOverlay);
         
         // 创建营养分析模态框
         nutritionSummaryModal = document.createElement('div');
         nutritionSummaryModal.id = 'nutrition-summary-modal';
-        nutritionSummaryModal.className = 'nutrition-summary-modal';
+        nutritionSummaryModal.className = 'nutrition-summary-modal ios-style bottom-sheet';
         nutritionSummaryModal.innerHTML = `
+            <div class="modal-handle"></div>
             <div class="modal-header">
-                <h3>营养分析</h3>
-                <button id="close-nutrition-modal" class="close-button">&times;</button>
+                <div class="modal-title">
+                    <h3>Meal Nutrition</h3>
+                </div>
+                <button id="close-nutrition-modal" class="close-button ios-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
+            
             <div class="modal-content">
-                <div class="nutrition-summary">
-                    <div class="total-section">
-                        <div class="total-calories">
-                            <h4>总热量</h4>
-                            <p class="value">0</p>
-                            <p class="unit">卡路里</p>
-                        </div>
-                        <div class="glycemic-section">
-                            <div class="glycemic-load">
-                                <h4>血糖负荷 <i class="info-icon">i</i></h4>
-                                <p class="value">0</p>
-                                <p class="unit">GL</p>
+                <div class="meal-summary">
+                    
+                    <div class="nutrition-overview ios-card">
+                        <div class="calorie-summary">
+                            <div class="calorie-ring-container">
+                                <svg viewBox="0 0 120 120" class="calorie-ring">
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#F0F0F0" stroke-width="12"/>
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#FFBE98" stroke-width="12" 
+                                        stroke-dasharray="339.292" stroke-dashoffset="254.469" class="calorie-progress"/>
+                                </svg>
+                                <div class="calorie-text">
+                                    <div class="calorie-value">0</div>
+                                    <div class="calorie-label">cal</div>
+                                </div>
                             </div>
-                            <div class="glycemic-index">
-                                <h4>平均血糖指数</h4>
-                                <p class="value">0</p>
-                                <p class="unit">GI</p>
+                            <div class="remaining-calories">
+                                <span class="remaining-value">0</span> cal remaining
+                            </div>
+                        </div>
+                        
+                        <div class="macro-distribution">
+                            <div class="macro-bar-container">
+                                <div class="macro-bar">
+                                    <div class="macro-segment protein-segment" style="width: 30%"></div>
+                                    <div class="macro-segment carbs-segment" style="width: 45%"></div>
+                                    <div class="macro-segment fat-segment" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="macro-legend">
+                                <div class="macro-item">
+                                    <div class="macro-color protein-color"></div>
+                                    <div class="macro-name">Protein</div>
+                                    <div class="macro-amount protein-amount">0g</div>
+                                </div>
+                                <div class="macro-item">
+                                    <div class="macro-color carbs-color"></div>
+                                    <div class="macro-name">Carbs</div>
+                                    <div class="macro-amount carbs-amount">0g</div>
+                                </div>
+                                <div class="macro-item">
+                                    <div class="macro-color fat-color"></div>
+                                    <div class="macro-name">Fat</div>
+                                    <div class="macro-amount fat-amount">0g</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="macros">
-                        <h4>营养素分布</h4>
-                        <div class="macro protein">
-                            <div class="macro-label">
-                                <span class="macro-name">蛋白质</span>
-                                <span class="macro-value">0g</span>
+                    
+                    <div class="health-insights ios-card">
+                        <h4 class="section-title">Health Insights</h4>
+                        <div class="insights-content">
+                            <div class="insight-metric">
+                                <div class="metric-icon glycemic-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 12H7L10 19L14 5L17 12H21" stroke="#FFBE98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">
+                                        <span>Glycemic Load</span>
+                                        <i class="info-icon">i</i>
+                                    </div>
+                                    <div class="metric-value glycemic-load-value">0</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-indicator low-rating">LOW</div>
+                                </div>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 0%; background-color: #4CAF50;"></div>
+                            
+                            <div class="insight-metric">
+                                <div class="metric-icon fiber-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 10C5 8.89543 5.89543 8 7 8H17C18.1046 8 19 8.89543 19 10V14C19 15.1046 18.1046 16 17 16H7C5.89543 16 5 15.1046 5 14V10Z" stroke="#4CAF50" stroke-width="2"/>
+                                        <path d="M12 8V6" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M12 18V16" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">Fiber</div>
+                                    <div class="metric-value fiber-value">0g</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-progress-bar">
+                                        <div class="rating-progress" style="width: 20%"></div>
+                                    </div>
+                                    <div class="rating-target">of 25g daily target</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-metric">
+                                <div class="metric-icon sodium-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 13.5V12H20V13.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M6.5 8.5L12 4L17.5 8.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 4V20" stroke="#FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-name">Sodium</div>
+                                    <div class="metric-value sodium-value">0mg</div>
+                                </div>
+                                <div class="metric-rating">
+                                    <div class="rating-progress-bar">
+                                        <div class="rating-progress" style="width: 15%"></div>
+                                    </div>
+                                    <div class="rating-target">of 2300mg daily limit</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="macro carbs">
-                            <div class="macro-label">
-                                <span class="macro-name">碳水化合物</span>
-                                <span class="macro-value">0g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 0%; background-color: #2196F3;"></div>
-                            </div>
-                        </div>
-                        <div class="macro fat">
-                            <div class="macro-label">
-                                <span class="macro-name">脂肪</span>
-                                <span class="macro-value">0g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 0%; background-color: #FF9800;"></div>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-button primary-button" id="add-to-diary-button">
+                            Add to Log
+                        </button>
                     </div>
                 </div>
             </div>
+            <style>
+                .ios-style {
+                    background-color: #FFFFFF;
+                    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+                    max-width: 100%;
+                    width: 100%;
+                    overflow-y: auto;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                }
+                
+                .bottom-sheet {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease-in-out;
+                    border-radius: 16px 16px 0 0;
+                    z-index: 1001;
+                }
+                
+                .bottom-sheet.show {
+                    transform: translateY(0);
+                }
+                
+                .modal-handle {
+                    width: 36px;
+                    height: 5px;
+                    background-color: #DDD;
+                    border-radius: 3px;
+                    margin: 12px auto 8px;
+                }
+                
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 4px 20px 16px;
+                    border-bottom: 1px solid #F0F0F0;
+                }
+                
+                .modal-title {
+                    text-align: center;
+                    flex: 1;
+                }
+                
+                .modal-title h3 {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #000000;
+                }
+                
+                .ios-close {
+                    background: none;
+                    border: none;
+                    padding: 4px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+                
+                .modal-content {
+                    padding: 16px;
+                    max-height: 75vh;
+                    overflow-y: auto;
+                }
+                
+                .ios-card {
+                    background-color: #F9F9F9;
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    border: 1px solid #EEEEEE;
+                }
+                
+                .meal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 16px;
+                }
+                
+                .meal-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .meal-time {
+                    font-size: 14px;
+                    padding: 4px 10px;
+                    background-color: #FFBE98;
+                    color: white;
+                    border-radius: 12px;
+                    font-weight: 500;
+                }
+                
+                .nutrition-overview {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                
+                .calorie-summary {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+                
+                .calorie-ring-container {
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                }
+                
+                .calorie-text {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                }
+                
+                .calorie-value {
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #000;
+                    line-height: 1;
+                }
+                
+                .calorie-label {
+                    font-size: 14px;
+                    color: #888;
+                }
+                
+                .remaining-calories {
+                    font-size: 16px;
+                    color: #555;
+                }
+                
+                .remaining-value {
+                    font-weight: 600;
+                    color: #FFBE98;
+                }
+                
+                .macro-distribution {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                
+                .macro-bar-container {
+                    width: 100%;
+                }
+                
+                .macro-bar {
+                    height: 12px;
+                    width: 100%;
+                    display: flex;
+                    border-radius: 6px;
+                    overflow: hidden;
+                }
+                
+                .macro-segment {
+                    height: 100%;
+                }
+                
+                .protein-segment {
+                    background-color: #4CAF50;
+                }
+                
+                .carbs-segment {
+                    background-color: #2196F3;
+                }
+                
+                .fat-segment {
+                    background-color: #FFBE98;
+                }
+                
+                .macro-legend {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                .macro-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                }
+                
+                .macro-color {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 2px;
+                }
+                
+                .protein-color {
+                    background-color: #4CAF50;
+                }
+                
+                .carbs-color {
+                    background-color: #2196F3;
+                }
+                
+                .fat-color {
+                    background-color: #FFBE98;
+                }
+                
+                .macro-name {
+                    font-size: 13px;
+                    color: #555;
+                }
+                
+                .macro-amount {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .section-title {
+                    margin: 0 0 14px 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .insights-content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                
+                .insight-metric {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+                
+                .metric-icon {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .glycemic-icon {
+                    background-color: rgba(255, 190, 152, 0.15);
+                }
+                
+                .fiber-icon {
+                    background-color: rgba(76, 175, 80, 0.15);
+                }
+                
+                .sodium-icon {
+                    background-color: rgba(255, 152, 0, 0.15);
+                }
+                
+                .metric-info {
+                    flex: 1;
+                }
+                
+                .metric-name {
+                    font-size: 14px;
+                    color: #555;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                }
+                
+                .metric-value {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .info-icon {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    background-color: #DDD;
+                    color: white;
+                    font-size: 9px;
+                    font-style: normal;
+                    cursor: pointer;
+                }
+                
+                .metric-rating {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 4px;
+                }
+                
+                .rating-indicator {
+                    font-size: 11px;
+                    font-weight: 600;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                }
+                
+                .low-rating {
+                    background-color: #EEFBEE;
+                    color: #4CAF50;
+                }
+                
+                .medium-rating {
+                    background-color: #FFF8E1;
+                    color: #FFC107;
+                }
+                
+                .high-rating {
+                    background-color: #FFEBEE;
+                    color: #F44336;
+                }
+                
+                .rating-progress-bar {
+                    width: 70px;
+                    height: 6px;
+                    background-color: #EEEEEE;
+                    border-radius: 3px;
+                    overflow: hidden;
+                }
+                
+                .rating-progress {
+                    height: 100%;
+                    background-color: #FFBE98;
+                }
+                
+                .rating-target {
+                    font-size: 10px;
+                    color: #888;
+                }
+                
+                .selected-dishes {
+                    padding-bottom: 8px;
+                }
+                
+                .dishes-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    max-height: 180px;
+                    overflow-y: auto;
+                }
+                
+                .action-buttons {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 24px;
+                    margin-top: 20px;
+                }
+                
+                .action-button {
+                    flex: 1;
+                    padding: 16px 0;
+                    border-radius: 12px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border: none;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    max-width: 90%;
+                    margin: 0 auto;
+                }
+                
+                .primary-button {
+                    background-color: #FFBE98;
+                    color: white;
+                    box-shadow: 0 2px 5px rgba(255, 190, 152, 0.3);
+                    transition: all 0.2s ease;
+                }
+                
+                .primary-button:hover {
+                    background-color: #FFA87D;
+                    transform: translateY(-1px);
+                }
+                
+                .primary-button:active {
+                    transform: translateY(1px);
+                    box-shadow: 0 1px 2px rgba(255, 190, 152, 0.3);
+                }
+                
+                .secondary-button {
+                    background-color: #F5F5F5;
+                    color: #333;
+                    border: 1px solid #DDDDDD;
+                }
+                
+                .modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    backdrop-filter: blur(4px);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    z-index: 1000;
+                }
+                
+                .modal-overlay.show {
+                    opacity: 1;
+                }
+            </style>
         `;
         
-        document.querySelector('.menu-recognition-container').appendChild(nutritionSummaryModal);
+        menuContainer.appendChild(nutritionSummaryModal);
         
         // 添加事件监听器
         const closeButton = nutritionSummaryModal.querySelector('#close-nutrition-modal');
@@ -654,9 +1690,46 @@
         const infoIcon = nutritionSummaryModal.querySelector('.info-icon');
         if (infoIcon) {
             infoIcon.addEventListener('click', function() {
-                alert('血糖负荷(GL)是一种评估食物对血糖影响的指标，由食物的血糖指数和碳水化合物含量共同决定。GL低于10为低，10-20为中等，大于20为高。');
+                alert('Glycemic Load (GL) measures how a food affects blood sugar levels, based on both its Glycemic Index and carbohydrate content. Low: <10, Medium: 10-20, High: >20.');
             });
         }
+        
+        // 添加手势滑动关闭功能
+        let startY = 0;
+        let currentY = 0;
+        let isDragging = false;
+        
+        nutritionSummaryModal.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        });
+        
+        nutritionSummaryModal.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            currentY = e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            
+            // 只有向下滑动才响应
+            if (deltaY > 0) {
+                nutritionSummaryModal.style.transform = `translateY(${deltaY}px)`;
+                e.preventDefault(); // 防止页面滚动
+            }
+        });
+        
+        nutritionSummaryModal.addEventListener('touchend', function() {
+            if (!isDragging) return;
+            const deltaY = currentY - startY;
+            
+            // 如果滑动距离超过模态框高度的20%，则关闭模态框
+            if (deltaY > nutritionSummaryModal.offsetHeight * 0.2) {
+                closeNutritionModal();
+            } else {
+                // 否则恢复原位
+                nutritionSummaryModal.style.transform = '';
+            }
+            
+            isDragging = false;
+        });
     }
     
     /**
@@ -668,11 +1741,18 @@
         console.log('隐藏营养分析模态框');
         
         if (modalOverlay && nutritionSummaryModal) {
+            // 添加过渡动画
+            nutritionSummaryModal.style.transform = 'translateY(100%)';
             modalOverlay.classList.remove('show');
-            nutritionSummaryModal.classList.remove('show');
             
-            // 恢复菜单容器滚动
-            document.querySelector('.menu-recognition-container').style.overflow = 'auto';
+            // 等待动画完成后再隐藏类
+            setTimeout(function() {
+                nutritionSummaryModal.classList.remove('show');
+                nutritionSummaryModal.style.transform = '';
+                
+                // 恢复菜单容器滚动
+                document.querySelector('.menu-recognition-container').style.overflow = 'auto';
+            }, 300);
         }
     }
     
@@ -723,52 +1803,67 @@
         const dishes = [
             {
                 id: 'dish1',
-                name: '清蒸鲈鱼',
+                name: 'Steamed Bass',
                 calories: 180,
                 protein: 25,
                 carbs: 2,
                 fat: 8,
+                fiber: 0.5,
+                sodium: 320,
                 glycemicLoad: 1,
+                gi: 45,
                 health: 'green'
             },
             {
                 id: 'dish2',
-                name: '西兰花炒牛肉',
+                name: 'Broccoli Beef',
                 calories: 320,
                 protein: 28,
                 carbs: 15,
                 fat: 16,
+                fiber: 4.2,
+                sodium: 620,
                 glycemicLoad: 6,
+                gi: 50,
                 health: 'green'
             },
             {
                 id: 'dish3',
-                name: '红烧排骨',
+                name: 'Braised Pork Ribs',
                 calories: 450,
                 protein: 32,
                 carbs: 20,
                 fat: 25,
+                fiber: 1.5,
+                sodium: 840,
                 glycemicLoad: 12,
+                gi: 65,
                 health: 'yellow'
             },
             {
                 id: 'dish4',
-                name: '番茄蛋花汤',
+                name: 'Tomato Egg Soup',
                 calories: 120,
                 protein: 8,
                 carbs: 7,
                 fat: 6,
+                fiber: 1.8,
+                sodium: 450,
                 glycemicLoad: 3,
+                gi: 40,
                 health: 'green'
             },
             {
                 id: 'dish5',
-                name: '糖醋里脊',
+                name: 'Sweet & Sour Pork',
                 calories: 380,
                 protein: 22,
                 carbs: 35,
                 fat: 15,
+                fiber: 1.2,
+                sodium: 760,
                 glycemicLoad: 22,
+                gi: 75,
                 health: 'red'
             }
         ];
@@ -780,8 +1875,12 @@
         if (!dish) {
             const dishItem = document.querySelector(`[data-dish-id="${id}"]`);
             if (dishItem) {
-                const dishTitle = dishItem.querySelector('.dish-title')?.textContent || '未命名菜品';
+                const dishTitle = dishItem.querySelector('.dish-title')?.textContent || 'Unnamed Dish';
                 const dishHealth = dishItem.getAttribute('data-health') || 'yellow';
+                
+                // 基于健康等级生成随机营养数据
+                const isGreen = dishHealth === 'green';
+                const isRed = dishHealth === 'red';
                 
                 // 创建默认菜品数据
                 return {
@@ -792,6 +1891,15 @@
                     protein: Math.floor(Math.random() * 20) + 5,
                     carbs: Math.floor(Math.random() * 40) + 10,
                     fat: Math.floor(Math.random() * 15) + 2,
+                    fiber: isGreen ? (Math.random() * 3 + 2).toFixed(1) : (Math.random() * 2).toFixed(1),
+                    sodium: isGreen ? 
+                        Math.floor(Math.random() * 300) + 200 : 
+                        (isRed ? Math.floor(Math.random() * 400) + 600 : Math.floor(Math.random() * 300) + 400),
+                    gi: dishHealth === 'green' ? 
+                        Math.floor(Math.random() * 15) + 40 : // 低GI (40-55)
+                        (dishHealth === 'yellow' ? 
+                            Math.floor(Math.random() * 15) + 56 : // 中GI (56-70)
+                            Math.floor(Math.random() * 15) + 71), // 高GI (71-85)
                     glycemicLoad: dishHealth === 'green' ? 
                         Math.floor(Math.random() * 5) + 1 : 
                         (dishHealth === 'yellow' ? 
@@ -818,15 +1926,37 @@
             toast = document.createElement('div');
             toast.className = 'toast-message';
             document.querySelector('.menu-recognition-container').appendChild(toast);
+            
+            // 添加样式
+            toast.style.position = 'fixed';
+            toast.style.bottom = '80px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            toast.style.color = 'white';
+            toast.style.padding = '12px 20px';
+            toast.style.borderRadius = '20px';
+            toast.style.fontSize = '14px';
+            toast.style.fontWeight = '500';
+            toast.style.zIndex = '10000';
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s ease';
         }
         
         // 设置消息内容
         toast.textContent = message;
-        toast.classList.add('show');
+        toast.style.opacity = '1';
         
         // 3秒后自动隐藏
         setTimeout(function() {
-            toast.classList.remove('show');
+            toast.style.opacity = '0';
+            
+            // 等待消失动画完成后移除元素
+            setTimeout(function() {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
         }, 3000);
     }
     
@@ -881,6 +2011,19 @@
         
         // 添加ESC键监听
         document.addEventListener('keydown', closeOnEsc);
+    }
+
+    // 添加"添加到食物日记"按钮事件
+    function setupActionButtons() {
+        const addToLogButton = document.getElementById('add-to-diary-button');
+        
+        if (addToLogButton) {
+            addToLogButton.addEventListener('click', function() {
+                console.log('添加到日志');
+                showToast("Meal added to your log!");
+                closeNutritionModal();
+            });
+        }
     }
 
     // 页面加载完成后初始化
