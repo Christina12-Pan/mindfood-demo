@@ -147,22 +147,24 @@
             </div>
             
             <div class="modal-content">
-                <div class="health-score-container flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
-                    <div class="stars-container flex mr-3">
-                        <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
-                            <span class="star text-xl text-gray-200" data-value="1">★</span>
-                            <span class="star text-xl text-gray-200" data-value="2">★</span>
-                            <span class="star text-xl text-gray-200" data-value="3">★</span>
-                            <span class="star text-xl text-gray-200" data-value="4">★</span>
-                            <span class="star text-xl text-gray-200" data-value="5">★</span>
+                <div class="health-score-container flex items-center justify-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="stars-container flex justify-center mb-2">
+                            <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
+                                <span class="star text-xl text-gray-200" data-value="1">★</span>
+                                <span class="star text-xl text-gray-200" data-value="2">★</span>
+                                <span class="star text-xl text-gray-200" data-value="3">★</span>
+                                <span class="star text-xl text-gray-200" data-value="4">★</span>
+                                <span class="star text-xl text-gray-200" data-value="5">★</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="health-score-details flex-1">
-                        <div class="flex items-center mb-1">
-                            <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
-                            <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                        <div class="health-score-details text-center">
+                            <div class="flex items-center justify-center mb-1">
+                                <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
+                                <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                            </div>
+                            <p class="score-description text-xs text-gray-600 m-0 leading-relaxed text-center">This meal aligns well with your health profile.</p>
                         </div>
-                        <p class="score-description text-xs text-gray-600 m-0 leading-relaxed">This meal aligns well with your health profile.</p>
                     </div>
                 </div>
                 
@@ -1169,22 +1171,24 @@
             </div>
             
             <div class="modal-content">
-                <div class="health-score-container flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
-                    <div class="stars-container flex mr-3">
-                        <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
-                            <span class="star text-xl text-gray-200" data-value="1">★</span>
-                            <span class="star text-xl text-gray-200" data-value="2">★</span>
-                            <span class="star text-xl text-gray-200" data-value="3">★</span>
-                            <span class="star text-xl text-gray-200" data-value="4">★</span>
-                            <span class="star text-xl text-gray-200" data-value="5">★</span>
+                <div class="health-score-container flex items-center justify-center p-4 bg-white rounded-xl shadow-md border border-gray-100 mb-4 hover:shadow-lg transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="stars-container flex justify-center mb-2">
+                            <div class="flex gap-0.5 transform hover:scale-105 transition-transform duration-200">
+                                <span class="star text-xl text-gray-200" data-value="1">★</span>
+                                <span class="star text-xl text-gray-200" data-value="2">★</span>
+                                <span class="star text-xl text-gray-200" data-value="3">★</span>
+                                <span class="star text-xl text-gray-200" data-value="4">★</span>
+                                <span class="star text-xl text-gray-200" data-value="5">★</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="health-score-details flex-1">
-                        <div class="flex items-center mb-1">
-                            <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
-                            <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                        <div class="health-score-details text-center">
+                            <div class="flex items-center justify-center mb-1">
+                                <h4 class="score-title text-base font-semibold text-gray-800 m-0">Good Match</h4>
+                                <div class="ml-2 px-1.5 py-0.5 rounded-full text-xs font-medium bg-opacity-90 score-badge bg-amber-100 text-amber-800 shadow-sm">Good</div>
+                            </div>
+                            <p class="score-description text-xs text-gray-600 m-0 leading-relaxed text-center">This meal aligns well with your health profile.</p>
                         </div>
-                        <p class="score-description text-xs text-gray-600 m-0 leading-relaxed">This meal aligns well with your health profile.</p>
                     </div>
                 </div>
                 

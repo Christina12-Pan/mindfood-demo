@@ -115,53 +115,7 @@
             });
         }
         
-        // 菜品卡片点击事件 - 显示详情面板
-        const dishCards = document.querySelectorAll('.dish-card');
-        dishCards.forEach(card => {
-            card.addEventListener('click', function(event) {
-                // 忽略如果点击的是添加按钮
-                if (event.target.closest('.add-button')) {
-                    return;
-                }
-                
-                // 获取菜品信息
-                const dishName = this.querySelector('.dish-name').textContent;
-                console.log(`菜品卡片点击: ${dishName}`);
-                
-                // 调用详情面板函数 (来自dish_detail_panel.js)
-                if (typeof window.showDishDetail === 'function') {
-                    // 先尝试根据名称找到对应的dishId
-                    if (typeof findDishIdByName === 'function') {
-                        const dishId = findDishIdByName(dishName);
-                        if (dishId) {
-                            window.showDishDetail(dishId);
-                        }
-                    } else {
-                        // 如果找不到函数，则直接传递一个模拟的ID
-                        // 假设菜品ID以1开始递增
-                        const index = Array.from(dishCards).indexOf(this);
-                        window.showDishDetail((index + 1).toString());
-                    }
-                }
-            });
-        });
-        
-        // 交互式菜品项点击事件
-        const dishItems = document.querySelectorAll('.dish-item');
-        dishItems.forEach(item => {
-            item.addEventListener('click', function(event) {
-                // 忽略如果点击的是复选框
-                if (event.target.closest('.dish-checkbox-container')) {
-                    return;
-                }
-                
-                // 获取菜品ID
-                const dishId = this.getAttribute('data-dish-id');
-                if (dishId && typeof window.showDishDetail === 'function') {
-                    window.showDishDetail(dishId);
-                }
-            });
-        });
+        console.log('事件监听器添加完成');
     }
 
     /**

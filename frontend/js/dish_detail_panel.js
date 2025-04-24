@@ -266,6 +266,11 @@
             // 检查是否点击了dish-item
             const dishItem = event.target.closest('.dish-item');
             if (dishItem) {
+                // 忽略如果点击的是复选框或添加按钮
+                if (event.target.closest('.dish-checkbox-container') || event.target.closest('.add-button') || event.target.closest('.dish-add')) {
+                    return;
+                }
+                
                 const dishId = dishItem.getAttribute('data-dish-id');
                 if (dishId) {
                     showDishDetail(dishId);
@@ -276,8 +281,8 @@
             // 检查是否点击了dish-card
             const dishCard = event.target.closest('.dish-card');
             if (dishCard) {
-                // 忽略如果是点击了add-button
-                if (event.target.closest('.add-button')) {
+                // 忽略如果点击的是添加按钮或选中交互区域
+                if (event.target.closest('.add-button') || event.target.closest('.dish-add') || event.target.closest('.dish-actions')) {
                     return;
                 }
                 
@@ -338,7 +343,7 @@
         
         // 更新健康评分星星
         updateHealthScoreStars(dish.healthScore);
-        panel.querySelector('.score-value').textContent = dish.healthScore.toFixed(1);
+        // 不再显示具体分数（已在CSS中隐藏）
         
         // 更新卡路里
         panel.querySelector('.calories-value').textContent = `${dish.calories} kcal`;
@@ -421,21 +426,31 @@
         const carbsPercentage = (dish.carbs / totalGrams * 100).toFixed(0);
         const fatPercentage = (dish.fat / totalGrams * 100).toFixed(0);
         
-        // 更新饼图 - 这里简单使用CSS变量来设置饼图部分
+        // 更新饼图 - 使用CSS变量设置conic-gradient的百分比
         const chartElement = document.querySelector('.macro-chart');
         if (chartElement) {
-            chartElement.style.setProperty('--protein-percentage', `${proteinPercentage}%`);
-            chartElement.style.setProperty('--carbs-percentage', `${carbsPercentage}%`);
-            chartElement.style.setProperty('--fat-percentage', `${fatPercentage}%`);
+            // 设置CSS变量
+            chartElement.style.setProperty('--protein-percentage', proteinPercentage);
+            chartElement.style.setProperty('--carbs-percentage', carbsPercentage);
+            chartElement.style.setProperty('--fat-percentage', fatPercentage);
             
-            // 添加一个简单的可视化饼图
-            chartElement.innerHTML = `
-                <div class="pie-chart">
-                    <div class="pie-segment protein" style="--percentage: ${proteinPercentage};"></div>
-                    <div class="pie-segment carbs" style="--percentage: ${carbsPercentage};"></div>
-                    <div class="pie-segment fat" style="--percentage: ${fatPercentage};"></div>
-                </div>
-            `;
+            // 简化HTML结构，仅创建pie-chart容器
+            chartElement.innerHTML = '<div class="pie-chart"></div>';
+            
+            // 添加营养素百分比文本显示
+            const pieChart = chartElement.querySelector('.pie-chart');
+            if (pieChart) {
+                const legendHtml = `
+                    <div class="pie-legend">
+                        <span class="protein-percent">${proteinPercentage}%</span>
+                        <span class="carbs-percent">${carbsPercentage}%</span>
+                        <span class="fat-percent">${fatPercentage}%</span>
+                    </div>
+                `;
+                pieChart.insertAdjacentHTML('afterend', legendHtml);
+            }
+            
+            console.log(`饼图已更新: 蛋白质 ${proteinPercentage}%, 碳水 ${carbsPercentage}%, 脂肪 ${fatPercentage}%`);
         }
     }
     

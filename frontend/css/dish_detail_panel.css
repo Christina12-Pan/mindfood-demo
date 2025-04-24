@@ -2,6 +2,26 @@
  * 菜品详情面板样式
  */
  
+/* iOS风格色彩变量 */
+:root {
+  --theme-primary: #FFBE98; /* 主题色 */
+  --theme-primary-light: #FFF1E6; /* 主题色浅色版 */
+  --theme-primary-dark: #F5A778; /* 主题色深色版 */
+  --text-primary: #333333; /* 主要文本颜色 */
+  --text-secondary: #666666; /* 次要文本颜色 */
+  --text-tertiary: #999999; /* 第三级文本颜色 */
+  --background-light: #FFFFFF; /* 亮色背景 */
+  --background-medium: #F9F9F9; /* 中等亮度背景 */
+  --background-card: #FFFFFF; /* 卡片背景 */
+  --separator: #E5E5E5; /* 分隔线颜色 */
+  --shadow-color: rgba(0, 0, 0, 0.05); /* 阴影颜色 */
+  
+  /* 饼图颜色 */
+  --chart-protein: #4ECDC4; /* 蛋白质 */
+  --chart-carbs: #FFD166; /* 碳水 */
+  --chart-fat: #FF6B6B; /* 脂肪 */
+}
+
 /* 菜品详情面板 */
 .dish-detail-panel {
     position: absolute;
@@ -15,7 +35,11 @@
     justify-content: center;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s ease, opacity 0.3s ease;
+    transition: visibility 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), 
+                opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: rgba(0, 0, 0, 0.4); /* 半透明黑色背景，iOS风格 */
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 .dish-detail-panel.show {
@@ -46,12 +70,12 @@
     max-width: 400px;
     max-height: 85%;
     margin: 0 12px 12px 12px;
-    background-color: white;
-    border-radius: 20px 20px 0 0;
+    background-color: var(--background-light);
+    border-radius: 16px; /* iOS风格的圆角 */
     overflow: hidden;
     transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16); /* 柔和阴影 */
 }
 
 .dish-detail-panel.show .dish-detail-container {
@@ -75,54 +99,59 @@
   object-position: center; /* 确保图片居中显示 */
 }
 
+/* 关闭按钮iOS风格 */
 .dish-detail-close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background-color 0.2s ease;
+}
+
+.dish-detail-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .dish-detail-close-btn svg {
-  width: 20px;
-  height: 20px;
-  color: #333;
+  width: 16px;
+  height: 16px;
+  color: white;
 }
 
 /* 详情内容 */
 .dish-detail-content {
-  padding: 16px 16px 20px 16px; /* 减小内边距，使内容更紧凑 */
+  padding: 16px 16px 20px 16px;
   position: relative;
   height: 100%;
-  max-height: 80vh; /* 确保不超过视口高度的80% */
-  overflow-y: auto; /* 添加垂直滚动 */
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: var(--background-light);
+  -webkit-overflow-scrolling: touch; /* iOS流畅滚动 */
 }
 
-/* 滚动条美化 */
+/* iOS滚动条样式 */
 .dish-detail-content::-webkit-scrollbar {
   width: 6px;
-}
-
-.dish-detail-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+  background-color: transparent;
 }
 
 .dish-detail-content::-webkit-scrollbar-thumb {
-  background: #FFBE98;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
 }
 
-.dish-detail-content::-webkit-scrollbar-thumb:hover {
-  background: #ffb080;
+.dish-detail-content::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /* 标题部分 */
@@ -130,13 +159,14 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 6px; /* 减小底部间距 */
+  margin-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 .dish-detail-title {
   font-size: 20px; /* 减小字体大小 */
-  font-weight: bold;
-  color: #333;
+  font-weight: 600; /* iOS偏好中等粗细 */
+  color: var(--text-primary);
   margin: 0;
   flex: 1;
   margin-right: 12px;
@@ -144,99 +174,154 @@
 
 .dish-detail-price {
   font-size: 20px;
-  font-weight: bold;
-  color: #FFBE98;
+  font-weight: 600;
+  color: var(--theme-primary);
 }
 
 .dish-detail-description {
   font-size: 14px; /* 减小字体大小 */
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.4;
   margin-bottom: 16px; /* 减小底部间距 */
 }
 
-/* 指标部分 */
+/* 指标部分 - 修复对齐问题 */
 .dish-detail-metrics {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px; /* 减小底部间距 */
-  padding: 12px; /* 减小内边距 */
-  background-color: #f9f9f9;
+  align-items: center; /* 确保子元素垂直居中 */
+  margin-bottom: 16px;
+  padding: 16px; /* 恢复内边距 */
+  background-color: var(--background-medium);
   border-radius: 12px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  border: 1px solid rgba(0, 0, 0, 0.03); /* 细微边框 */
+  overflow: hidden; /* 防止内容溢出 */
 }
 
 .metrics-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin: 0 0 8px 0;
+  font-size: 15px; /* 稍微减小字体大小 */
+  font-weight: 500; /* iOS标题字重 */
+  color: var(--text-secondary);
+  margin: 0 0 8px 0; /* 减少底部间距 */
+  height: auto; /* 自适应高度 */
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  white-space: nowrap; /* 防止文字换行 */
 }
 
 .health-score-container,
 .calories-container {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+  align-items: center; /* 水平居中 */
+  min-height: 70px; /* 减少固定高度 */
+  max-height: 90px; /* 设置最大高度 */
+  text-align: center; /* 文本居中 */
+}
+
+/* 分隔线 */
+.health-score-container {
+  position: relative;
+  padding-right: 16px; /* 为分隔线留出空间 */
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+.health-score-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background-color: var(--separator);
+}
+
+.calories-container {
+  padding-left: 16px; /* 为分隔线留出空间 */
+  overflow: hidden; /* 防止内容溢出 */
 }
 
 .health-score {
   display: flex;
   align-items: center;
+  justify-content: center; /* 水平居中 */
+  margin-top: 4px; /* 减少间距 */
+  height: auto; /* 自适应高度 */
 }
 
 .star-rating {
-  margin-right: 8px;
+  margin-right: 0; /* 移除右边距因为不再显示分数 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平居中 */
 }
 
 .stars-container {
   display: flex;
+  align-items: center;
+  justify-content: center; /* 水平居中 */
+  flex-wrap: nowrap; /* 防止星星换行 */
 }
 
 .star {
-  font-size: 18px;
-  margin-right: 2px;
+  font-size: 18px; /* 增大星星尺寸 */
+  margin-right: 2px; /* 增加星星间距 */
 }
 
 .star.full, .star.half {
-  color: #FFBE98;
+  color: var(--theme-primary); /* 恢复使用主题色 */
 }
 
 .star.empty {
-  color: #ddd;
+  color: #E5E5E5; /* 更浅的灰色，iOS风格 */
 }
 
 .score-value {
-  font-size: 18px;
-  font-weight: bold;
-  color: #FFBE98;
+  display: none; /* 隐藏具体分数 */
 }
 
 .calories-value {
-  font-size: 18px;
+  font-size: 22px; /* 增大字体 */
   font-weight: bold;
-  color: #FFBE98;
+  color: var(--theme-primary);
+  margin-top: 6px; /* 与Health Score保持一致的间距 */
+  line-height: 1.2; /* 调整行高 */
+  height: 22px; /* 固定高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平居中 */
 }
 
 /* 营养分解部分 */
 .nutrition-breakdown {
-  margin-bottom: 16px; /* 减小底部间距 */
+  margin-bottom: 16px;
 }
 
 .macro-nutrients {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px; /* 减小内边距 */
-  background-color: #f9f9f9;
-  border-radius: 12px; /* 减小圆角 */
+  padding: 14px; /* 增加内边距 */
+  background-color: var(--background-medium);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  border: 1px solid rgba(0, 0, 0, 0.03); /* 细微边框 */
 }
 
 .macro-chart-container {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .macro-chart {
-  width: 100px; /* 减小尺寸 */
-  height: 100px; /* 减小尺寸 */
-  margin: 0 auto;
+  width: 90px; /* 稍微减小尺寸 */
+  height: 90px; /* 稍微减小尺寸 */
   position: relative;
 }
 
@@ -245,34 +330,55 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  background-color: #f0f0f0;
+  background: conic-gradient(
+    var(--chart-protein) 0% calc(var(--protein-percentage, 0) * 1%),
+    var(--chart-carbs) calc(var(--protein-percentage, 0) * 1%) calc((var(--protein-percentage, 0) + var(--carbs-percentage, 0)) * 1%),
+    var(--chart-fat) calc((var(--protein-percentage, 0) + var(--carbs-percentage, 0)) * 1%) 100%
+  );
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
-  background-color: #f0f0f0;
 }
 
-.pie-segment {
+/* 百分比标签样式 */
+.pie-legend {
+  display: none; /* 暂时隐藏，可根据需求修改为显示 */
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  height: 100%;
-  transform-origin: 50% 50%;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1;
 }
 
-.pie-segment.protein {
-  background-color: #4ECDC4;
-  transform: rotate(0deg) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
-  z-index: 3;
+.protein-percent, .carbs-percent, .fat-percent {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin: 0 2px;
+  font-weight: bold;
+  font-size: 8px;
+  color: white;
 }
 
-.pie-segment.carbs {
-  background-color: #FFD166;
-  transform: rotate(calc(var(--protein-percentage, 0) * 3.6deg)) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
-  z-index: 2;
+.protein-percent {
+  background-color: var(--chart-protein);
 }
 
-.pie-segment.fat {
-  background-color: #FF6B6B;
-  transform: rotate(calc((var(--protein-percentage, 0) + var(--carbs-percentage, 0)) * 3.6deg)) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
-  z-index: 1;
+.carbs-percent {
+  background-color: var(--chart-carbs);
+}
+
+.fat-percent {
+  background-color: var(--chart-fat);
+}
+
+/* 移除旧的饼图段落样式 */
+.pie-segment {
+  display: none !important; /* 确保完全隐藏 */
 }
 
 .macro-details {
@@ -298,27 +404,27 @@
 }
 
 .macro-item.protein .macro-color {
-  background-color: #4ECDC4;
+  background-color: var(--chart-protein);
 }
 
 .macro-item.carbs .macro-color {
-  background-color: #FFD166;
+  background-color: var(--chart-carbs);
 }
 
 .macro-item.fat .macro-color {
-  background-color: #FF6B6B;
+  background-color: var(--chart-fat);
 }
 
 .macro-name {
   flex: 1;
   font-size: 14px;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .macro-value {
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--text-primary);
 }
 
 /* 操作按钮 */
@@ -329,21 +435,24 @@
 .add-to-cart-btn {
   width: 100%;
   padding: 12px; /* 减小内边距 */
-  background-color: #FFBE98;
+  background-color: var(--theme-primary);
   color: white;
   border: none;
-  border-radius: 10px; /* 减小圆角 */
+  border-radius: 12px; /* iOS风格圆角 */
   font-size: 14px; /* 减小字体 */
-  font-weight: bold;
+  font-weight: 500; /* iOS按钮标准粗细 */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(255, 190, 152, 0.2); /* 主题色阴影 */
 }
 
 .add-to-cart-btn:hover {
-  background-color: #ffb080;
+  background-color: var(--theme-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 190, 152, 0.25);
 }
 
 .add-to-cart-btn svg {
@@ -420,4 +529,28 @@
     width: auto !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
     border-radius: 20px !important;
+}
+
+/* 营养健康评分匹配文本 */
+.health-match {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: left;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 营养健康评分描述文本 */
+.health-match-description {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: left;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 } 
