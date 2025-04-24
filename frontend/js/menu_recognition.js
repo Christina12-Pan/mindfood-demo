@@ -114,6 +114,54 @@
                 }
             });
         }
+        
+        // 菜品卡片点击事件 - 显示详情面板
+        const dishCards = document.querySelectorAll('.dish-card');
+        dishCards.forEach(card => {
+            card.addEventListener('click', function(event) {
+                // 忽略如果点击的是添加按钮
+                if (event.target.closest('.add-button')) {
+                    return;
+                }
+                
+                // 获取菜品信息
+                const dishName = this.querySelector('.dish-name').textContent;
+                console.log(`菜品卡片点击: ${dishName}`);
+                
+                // 调用详情面板函数 (来自dish_detail_panel.js)
+                if (typeof window.showDishDetail === 'function') {
+                    // 先尝试根据名称找到对应的dishId
+                    if (typeof findDishIdByName === 'function') {
+                        const dishId = findDishIdByName(dishName);
+                        if (dishId) {
+                            window.showDishDetail(dishId);
+                        }
+                    } else {
+                        // 如果找不到函数，则直接传递一个模拟的ID
+                        // 假设菜品ID以1开始递增
+                        const index = Array.from(dishCards).indexOf(this);
+                        window.showDishDetail((index + 1).toString());
+                    }
+                }
+            });
+        });
+        
+        // 交互式菜品项点击事件
+        const dishItems = document.querySelectorAll('.dish-item');
+        dishItems.forEach(item => {
+            item.addEventListener('click', function(event) {
+                // 忽略如果点击的是复选框
+                if (event.target.closest('.dish-checkbox-container')) {
+                    return;
+                }
+                
+                // 获取菜品ID
+                const dishId = this.getAttribute('data-dish-id');
+                if (dishId && typeof window.showDishDetail === 'function') {
+                    window.showDishDetail(dishId);
+                }
+            });
+        });
     }
 
     /**
@@ -196,9 +244,66 @@
     function showOrderModal() {
         const modal = document.getElementById('order-modal');
         if (modal) {
+            // 添加show类显示模态框
             modal.classList.add('show');
-            // 防止背景滚动
-            document.body.style.overflow = 'hidden';
+            
+            // 获取Menu Recognition页面容器
+            const menuScreen = document.querySelector('.screen[data-page="menu-recognition"]');
+            if (menuScreen) {
+                // 如果找到Menu Recognition页面，只阻止该页面内的滚动
+                const menuContent = menuScreen.querySelector('.menu-content');
+                if (menuContent) {
+                    menuContent.style.overflow = 'hidden';
+                }
+                
+                // 先确保模态框是Menu Recognition页面的子元素
+                if (modal.parentElement !== menuScreen) {
+                    // 如果不是，移动到Menu Recognition页面
+                    menuScreen.appendChild(modal);
+                }
+                
+                // 确保模态框在屏幕内居中显示
+                modal.style.position = 'absolute';
+                modal.style.zIndex = '2000';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
+                
+                // 计算模态框内容的样式
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    // 重置之前可能存在的样式
+                    modalContent.style.position = '';
+                    modalContent.style.top = '';
+                    modalContent.style.left = '';
+                    modalContent.style.transform = '';
+                    
+                    // 获取手机壳的内部尺寸
+                    const phoneInnerWidth = menuScreen.clientWidth; 
+                    const phoneInnerHeight = menuScreen.clientHeight;
+                    
+                    // 设置模态框内容大小和溢出控制
+                    modalContent.style.maxWidth = 'calc(100% - 40px)'; // 左右各留20px边距
+                    modalContent.style.maxHeight = 'calc(100% - 80px)'; // 上下各留40px边距
+                    modalContent.style.width = 'auto'; // 确保模态框不会撑满屏幕
+                    modalContent.style.overflow = 'auto'; // 如果内容过多，允许滚动
+                    modalContent.style.margin = '0 auto'; // 水平居中
+                }
+                
+                // 调整订单列表部分，避免内容过多时溢出
+                const orderList = modal.querySelector('.order-list');
+                if (orderList) {
+                    orderList.style.maxHeight = '40vh'; // 最多占屏幕高度的40%
+                    orderList.style.overflowY = 'auto'; // 允许垂直滚动
+                }
+            } else {
+                // 如果找不到Menu Recognition页面，则阻止整个文档的滚动（备用方案）
+                document.body.style.overflow = 'hidden';
+            }
         }
     }
 
@@ -208,9 +313,53 @@
     function hideOrderModal() {
         const modal = document.getElementById('order-modal');
         if (modal) {
+            // 移除show类隐藏模态框
             modal.classList.remove('show');
-            // 恢复背景滚动
-            document.body.style.overflow = '';
+            
+            // 获取Menu Recognition页面容器
+            const menuScreen = document.querySelector('.screen[data-page="menu-recognition"]');
+            if (menuScreen) {
+                // 如果找到Menu Recognition页面，恢复该页面内的滚动
+                const menuContent = menuScreen.querySelector('.menu-content');
+                if (menuContent) {
+                    menuContent.style.overflow = 'auto';
+                }
+                
+                // 清除之前设置的模态框样式
+                modal.style.position = '';
+                modal.style.top = '';
+                modal.style.left = '';
+                modal.style.width = '';
+                modal.style.height = '';
+                modal.style.zIndex = '';
+                modal.style.display = '';
+                modal.style.alignItems = '';
+                modal.style.justifyContent = '';
+                
+                // 清除模态框内容的样式
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.style.position = '';
+                    modalContent.style.top = '';
+                    modalContent.style.left = '';
+                    modalContent.style.transform = '';
+                    modalContent.style.maxWidth = '';
+                    modalContent.style.maxHeight = '';
+                    modalContent.style.width = '';
+                    modalContent.style.overflow = '';
+                    modalContent.style.margin = '';
+                }
+                
+                // 清除订单列表样式
+                const orderList = modal.querySelector('.order-list');
+                if (orderList) {
+                    orderList.style.maxHeight = '';
+                    orderList.style.overflowY = '';
+                }
+            } else {
+                // 如果找不到Menu Recognition页面，则恢复整个文档的滚动（备用方案）
+                document.body.style.overflow = '';
+            }
         }
     }
 

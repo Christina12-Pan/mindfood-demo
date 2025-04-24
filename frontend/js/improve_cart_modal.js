@@ -96,8 +96,27 @@
             </div>
         `;
         
-        // 将模态框添加到页面
-        document.body.appendChild(orderModal);
+        // 查找菜单识别页面容器
+        const menuResultScreen = document.querySelector('.screen[data-page="menu-recognition"]');
+        
+        // 将模态框添加到正确的容器中
+        if (menuResultScreen) {
+            // 优先添加到菜单结果页面
+            menuResultScreen.appendChild(orderModal);
+            
+            // 设置模态框为绝对定位，确保正确显示在菜单结果页面内
+            orderModal.style.position = 'absolute';
+            orderModal.style.top = '0';
+            orderModal.style.left = '0';
+            orderModal.style.width = '100%';
+            orderModal.style.height = '100%';
+            
+            console.log('订单模态框已添加到菜单结果页面');
+        } else {
+            // 如果菜单结果页面不存在，则添加到body（备用方案）
+            document.body.appendChild(orderModal);
+            console.log('未找到菜单结果页面，订单模态框已添加到body');
+        }
         
         // 更新模态框样式
         updateOrderModalStyle();
@@ -116,7 +135,7 @@
         styleElement.textContent = `
             /* 订单模态框样式 */
             .order-modal {
-                position: fixed;
+                position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
@@ -216,6 +235,13 @@
         document.addEventListener('click', function(event) {
             if (event.target.closest('#cart-button') || event.target.closest('#show-order-modal') || event.target.closest('#order-button')) {
                 showOrderModal();
+                
+                // 在模态框显示后调整位置
+                setTimeout(function() {
+                    if (typeof window.adjustModalPosition === 'function') {
+                        window.adjustModalPosition();
+                    }
+                }, 10);
             }
         });
         
@@ -231,6 +257,19 @@
             modal.classList.add('show');
             // 防止背景滚动
             document.body.style.overflow = 'hidden';
+            
+            // 确保模态框位于菜单结果页面内
+            const menuResultScreen = document.querySelector('.screen[data-page="menu-recognition"]');
+            if (menuResultScreen && modal.parentElement !== menuResultScreen) {
+                menuResultScreen.appendChild(modal);
+                
+                // 设置模态框为绝对定位
+                modal.style.position = 'absolute';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+            }
         }
     }
     

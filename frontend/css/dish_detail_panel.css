@@ -1,0 +1,423 @@
+/**
+ * 菜品详情面板样式
+ */
+ 
+/* 菜品详情面板 */
+.dish-detail-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.dish-detail-panel.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 遮罩层 */
+.dish-detail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dish-detail-panel.show .dish-detail-overlay {
+    opacity: 1;
+}
+
+/* 详情内容容器 */
+.dish-detail-container {
+    position: relative;
+    width: calc(100% - 24px);
+    max-width: 400px;
+    max-height: 85%;
+    margin: 0 12px 12px 12px;
+    background-color: white;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dish-detail-panel.show .dish-detail-container {
+    transform: translateY(0);
+}
+
+/* 详情头部 */
+.dish-detail-header {
+  position: relative;
+  width: 100%;
+  height: 180px; /* 降低高度，避免太高 */
+  overflow: hidden; /* 避免图片溢出 */
+  border-top-left-radius: 24px; /* 与面板保持一致 */
+  border-top-right-radius: 24px; /* 与面板保持一致 */
+}
+
+.dish-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* 确保图片居中显示 */
+}
+
+.dish-detail-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-detail-close-btn svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+}
+
+/* 详情内容 */
+.dish-detail-content {
+  padding: 16px 16px 20px 16px; /* 减小内边距，使内容更紧凑 */
+  position: relative;
+  height: 100%;
+  max-height: 80vh; /* 确保不超过视口高度的80% */
+  overflow-y: auto; /* 添加垂直滚动 */
+}
+
+/* 滚动条美化 */
+.dish-detail-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dish-detail-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.dish-detail-content::-webkit-scrollbar-thumb {
+  background: #FFBE98;
+  border-radius: 10px;
+}
+
+.dish-detail-content::-webkit-scrollbar-thumb:hover {
+  background: #ffb080;
+}
+
+/* 标题部分 */
+.dish-detail-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px; /* 减小底部间距 */
+}
+
+.dish-detail-title {
+  font-size: 20px; /* 减小字体大小 */
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.dish-detail-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFBE98;
+}
+
+.dish-detail-description {
+  font-size: 14px; /* 减小字体大小 */
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 16px; /* 减小底部间距 */
+}
+
+/* 指标部分 */
+.dish-detail-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px; /* 减小底部间距 */
+  padding: 12px; /* 减小内边距 */
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.metrics-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.health-score-container,
+.calories-container {
+  flex: 1;
+}
+
+.health-score {
+  display: flex;
+  align-items: center;
+}
+
+.star-rating {
+  margin-right: 8px;
+}
+
+.stars-container {
+  display: flex;
+}
+
+.star {
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.star.full, .star.half {
+  color: #FFBE98;
+}
+
+.star.empty {
+  color: #ddd;
+}
+
+.score-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFBE98;
+}
+
+.calories-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFBE98;
+}
+
+/* 营养分解部分 */
+.nutrition-breakdown {
+  margin-bottom: 16px; /* 减小底部间距 */
+}
+
+.macro-nutrients {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px; /* 减小内边距 */
+  background-color: #f9f9f9;
+  border-radius: 12px; /* 减小圆角 */
+}
+
+.macro-chart-container {
+  flex: 1;
+}
+
+.macro-chart {
+  width: 100px; /* 减小尺寸 */
+  height: 100px; /* 减小尺寸 */
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 饼图样式 */
+.pie-chart {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.pie-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+}
+
+.pie-segment.protein {
+  background-color: #4ECDC4;
+  transform: rotate(0deg) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
+  z-index: 3;
+}
+
+.pie-segment.carbs {
+  background-color: #FFD166;
+  transform: rotate(calc(var(--protein-percentage, 0) * 3.6deg)) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
+  z-index: 2;
+}
+
+.pie-segment.fat {
+  background-color: #FF6B6B;
+  transform: rotate(calc((var(--protein-percentage, 0) + var(--carbs-percentage, 0)) * 3.6deg)) skew(calc((100 - var(--percentage, 0)) * 3.6deg));
+  z-index: 1;
+}
+
+.macro-details {
+  flex: 1.5;
+  padding-left: 16px; /* 减小左内边距 */
+}
+
+.macro-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* 减小底部间距 */
+}
+
+.macro-item:last-child {
+  margin-bottom: 0;
+}
+
+.macro-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.macro-item.protein .macro-color {
+  background-color: #4ECDC4;
+}
+
+.macro-item.carbs .macro-color {
+  background-color: #FFD166;
+}
+
+.macro-item.fat .macro-color {
+  background-color: #FF6B6B;
+}
+
+.macro-name {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.macro-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 操作按钮 */
+.dish-detail-actions {
+  margin-top: 24px; /* 增加顶部间距 */
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 12px; /* 减小内边距 */
+  background-color: #FFBE98;
+  color: white;
+  border: none;
+  border-radius: 10px; /* 减小圆角 */
+  font-size: 14px; /* 减小字体 */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #ffb080;
+}
+
+.add-to-cart-btn svg {
+  width: 16px; /* 减小图标尺寸 */
+  height: 16px; /* 减小图标尺寸 */
+  margin-right: 6px; /* 减小右边距 */
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .dish-detail-container {
+    max-width: 420px; /* 减小最大宽度 */
+    border-radius: 24px;
+    max-height: 80vh; /* 减小最大高度 */
+    transform: translateY(50px) scale(0.95);
+  }
+  
+  .dish-detail-panel {
+    align-items: center;
+  }
+  
+  .dish-detail-panel.show .dish-detail-container {
+    transform: translateY(0) scale(1);
+  }
+  
+  .dish-detail-content {
+    max-height: calc(80vh - 180px); /* 调整最大高度以匹配减小的头部高度 */
+  }
+}
+
+/* 在极小屏幕上进一步调整 */
+@media (max-width: 350px) {
+  .dish-detail-header {
+    height: 150px; /* 更小的头部高度 */
+  }
+  
+  .dish-detail-title {
+    font-size: 18px; /* 更小的标题字体 */
+  }
+  
+  .macro-chart {
+    width: 80px; /* 更小的图表尺寸 */
+    height: 80px;
+  }
+  
+  .macro-details {
+    padding-left: 12px;
+  }
+}
+
+/* 信息详情区域，添加内边距防止内容被底部按钮遮挡 */
+.dish-detail-info {
+    padding: 0 20px 80px 20px; /* 底部增加内边距，为添加按钮留出空间 */
+}
+
+/* 模态框样式覆盖 */
+#order-modal.show {
+    display: flex !important; /* 强制使用flex布局 */
+    align-items: center !important; /* 垂直居中 */
+    justify-content: center !important; /* 水平居中 */
+    position: absolute !important; /* 绝对定位 */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2000 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important; /* 半透明背景 */
+}
+
+#order-modal .modal-content {
+    margin: 0 auto !important; /* 强制水平居中 */
+    max-width: calc(100% - 40px) !important; /* 左右各留20px边距 */
+    max-height: calc(100% - 80px) !important; /* 上下各留40px边距 */
+    width: auto !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 20px !important;
+} 
