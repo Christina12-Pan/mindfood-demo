@@ -336,15 +336,15 @@
                                     <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
-                                            <span>2 min</span>
+                                            <span class="text-xs text-gray-500">450 cal</span>
                                         </div>
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                                             </svg>
-                                            <span>450 cal</span>
+                                            <span class="text-xs text-gray-500">Heat for 2 min</span>
                                         </div>
                                     </div>
                                 </div>
@@ -368,15 +368,15 @@
                                     <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
-                                            <span>2.5 min</span>
+                                            <span class="text-xs text-gray-500">520 cal</span>
                                         </div>
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                                             </svg>
-                                            <span>520 cal</span>
+                                            <span class="text-xs text-gray-500">Heat for 2.5 min</span>
                                         </div>
                                     </div>
                                 </div>
@@ -791,116 +791,252 @@
         section.className = 'daily-meal-plan mt-6';
         
         // 标题
-        const title = document.createElement('h3');
-        title.className = 'text-lg font-semibold text-gray-800 mb-3';
-        title.textContent = 'Sunday Meal Plan';
-        section.appendChild(title);
+        const titleContainer = document.createElement('div');
+        titleContainer.className = 'flex justify-between items-center mb-4';
         
-        // 餐食列表
-        const mealItems = [
-            {
-                time: 'Breakfast',
-                title: 'Greek Yogurt Bowl',
-                desc: 'Greek yogurt with honey, nuts and berries',
-                image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-                nutrition: {
-                    calories: 320,
-                    protein: 18,
-                    carbs: 42,
-                    fat: 9
-                }
-            },
-            {
-                time: 'Lunch',
-                title: 'Quinoa Salad',
-                desc: 'Quinoa with roasted vegetables and chicken',
-                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-                nutrition: {
-                    calories: 450,
-                    protein: 28,
-                    carbs: 52,
-                    fat: 12
-                }
-            },
-            {
-                time: 'Dinner',
-                title: 'Baked Salmon',
-                desc: 'Salmon with asparagus and sweet potato',
-                image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-                nutrition: {
-                    calories: 520,
-                    protein: 38,
-                    carbs: 30,
-                    fat: 24
-                }
-            }
-        ];
-        
-        // 创建餐食卡片
-        mealItems.forEach(meal => {
-            section.appendChild(createMealCard(meal));
-        });
-        
-        return section;
-    }
-    
-    /**
-     * 创建餐食卡片
-     * @param {Object} meal 餐食信息
-     * @returns {HTMLElement} 餐食卡片元素
-     */
-    function createMealCard(meal) {
-        const card = document.createElement('div');
-        card.className = 'meal-card bg-white rounded-xl shadow-md overflow-hidden mb-4 flex';
-        
-        // 图片区域
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'meal-image-container w-1/3 h-24 overflow-hidden';
-        
-        const image = document.createElement('img');
-        image.className = 'w-full h-full object-cover';
-        image.src = meal.image;
-        image.alt = meal.title;
-        imageContainer.appendChild(image);
-        
-        // 内容区域
-        const content = document.createElement('div');
-        content.className = 'meal-content p-3 flex-1';
-        
-        // 时间标签
-        const timeLabel = document.createElement('span');
-        timeLabel.className = 'time-label inline-block text-xs bg-primary bg-opacity-20 text-primary px-2 py-1 rounded-full mb-1';
-        timeLabel.textContent = meal.time;
-        content.appendChild(timeLabel);
-        
-        // 标题
-        const title = document.createElement('h4');
-        title.className = 'text-base font-medium text-gray-800 leading-tight';
-        title.textContent = meal.title;
-        content.appendChild(title);
-        
-        // 描述
-        const desc = document.createElement('p');
-        desc.className = 'text-xs text-gray-600 mt-1';
-        desc.textContent = meal.desc;
-        content.appendChild(desc);
-        
-        // 营养素信息
-        const nutrition = document.createElement('div');
-        nutrition.className = 'nutrition-info flex items-center mt-2 text-xs text-gray-500';
-        
-        nutrition.innerHTML = `
-            <span class="mr-2">${meal.nutrition.calories} cal</span>
-            <span class="mr-2">${meal.nutrition.protein}g protein</span>
-            <span>${meal.nutrition.carbs}g carbs</span>
+        const titleContent = document.createElement('div');
+        titleContent.innerHTML = `
+            <h3 class="text-lg font-semibold text-gray-800">Sunday Meal Plan</h3>
+            <p class="text-xs text-gray-500 mt-1">Today's ready-to-heat meal boxes</p>
         `;
         
-        content.appendChild(nutrition);
+        titleContainer.appendChild(titleContent);
+        section.appendChild(titleContainer);
         
-        card.appendChild(imageContainer);
-        card.appendChild(content);
+        // 午餐模块
+        const lunchSection = document.createElement('div');
+        lunchSection.className = 'mb-5';
+        lunchSection.innerHTML = `
+            <div class="flex items-center mb-3 justify-between">
+                <div class="flex items-center">
+                    <span class="text-sm font-medium text-gray-700">Lunch</span>
+                    <span class="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Ready to heat</span>
+                </div>
+                <button class="ml-2 px-3 py-1 text-xs font-medium text-primary bg-primary bg-opacity-10 rounded-full hover:bg-opacity-20 transition">Add to Log</button>
+            </div>
+            
+            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="flex">
+                    <div class="w-1/3">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="Quinoa Bowl" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-2/3 p-4">
+                        <h4 class="text-base font-medium text-gray-800">Quinoa Power Bowl</h4>
+                        <div class="flex items-center mt-1 text-xs">
+                            <span class="text-primary font-medium">Box #3</span>
+                            <span class="mx-1 text-gray-400">•</span>
+                            <span class="text-gray-500">Prepared on May 13</span>
+                        </div>
+                        
+                        <div class="mt-3 space-y-1.5">
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Main:</div>
+                                <div class="text-xs text-gray-700 flex-1">Quinoa with roasted vegetables</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Protein:</div>
+                                <div class="text-xs text-gray-700 flex-1">Grilled chicken breast</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Side:</div>
+                                <div class="text-xs text-gray-700 flex-1">Cucumber & cherry tomato salad</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-3 pt-2 border-t border-gray-100">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <span class="text-xs text-gray-500">450 cal</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-xs text-gray-500">Heat for 2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        section.appendChild(lunchSection);
         
-        return card;
+        // 晚餐模块
+        const dinnerSection = document.createElement('div');
+        dinnerSection.className = 'mb-5';
+        dinnerSection.innerHTML = `
+            <div class="flex items-center mb-3 justify-between">
+                <div class="flex items-center">
+                    <span class="text-sm font-medium text-gray-700">Dinner</span>
+                    <span class="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Ready to heat</span>
+                </div>
+                <button class="ml-2 px-3 py-1 text-xs font-medium text-primary bg-primary bg-opacity-10 rounded-full hover:bg-opacity-20 transition">Add to Log</button>
+            </div>
+            
+            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="flex">
+                    <div class="w-1/3">
+                        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="Salmon Dinner" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-2/3 p-4">
+                        <h4 class="text-base font-medium text-gray-800">Baked Salmon Dinner</h4>
+                        <div class="flex items-center mt-1 text-xs">
+                            <span class="text-primary font-medium">Box #5</span>
+                            <span class="mx-1 text-gray-400">•</span>
+                            <span class="text-gray-500">Prepared on May 14</span>
+                        </div>
+                        
+                        <div class="mt-3 space-y-1.5">
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Main:</div>
+                                <div class="text-xs text-gray-700 flex-1">Baked salmon with lemon herbs</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Side 1:</div>
+                                <div class="text-xs text-gray-700 flex-1">Roasted asparagus</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-14 text-xs font-medium text-gray-600">Side 2:</div>
+                                <div class="text-xs text-gray-700 flex-1">Garlic mashed sweet potato</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-3 pt-2 border-t border-gray-100">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <span class="text-xs text-gray-500">520 cal</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-xs text-gray-500">Heat for 2.5 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        section.appendChild(dinnerSection);
+        
+        // 营养信息小部件
+        const nutritionWidget = document.createElement('div');
+        nutritionWidget.className = 'bg-white rounded-xl shadow-sm border border-gray-100 p-4 mt-5';
+        nutritionWidget.innerHTML = `
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h4 class="text-sm font-medium text-gray-800">Today's Nutrition Intake</h4>
+                    <p class="text-xs text-gray-500 mt-0.5">46% of daily goal achieved</p>
+                </div>
+                <button class="text-xs text-primary font-medium px-2.5 py-1 bg-primary bg-opacity-10 rounded-full">View Details</button>
+            </div>
+            
+            <div class="flex items-center"> <!-- 关键：加items-center实现垂直居中 -->
+                <!-- Left: Calorie ring chart -->
+                <div class="w-1/3 flex justify-center items-center"> <!-- 加items-center -->
+                    <div class="relative w-24 h-24">
+                        <!-- Calorie ring -->
+                        <svg viewBox="0 0 36 36" class="w-24 h-24 transform -rotate-90">
+                            <!-- Background ring -->
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="#E5E7EB" stroke-width="4" stroke-dasharray="100, 100"/>
+                            <!-- Calorie progress 46% -->
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="#FFBE98" stroke-width="4" stroke-dasharray="46, 100"/>
+                        </svg>
+                        <!-- Center text -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-xs text-gray-500">Calories</span>
+                            <span class="text-lg font-bold text-gray-800">970</span>
+                            <span class="text-xs text-gray-400">/ 2100</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Nutrition details (no calorie bar) -->
+                <div class="w-2/3 pl-2">
+                    <div class="space-y-3">
+                        <!-- Protein -->
+                        <div class="nutrition-item">
+                            <div class="flex justify-between items-center mb-1">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700">Protein</span>
+                                </div>
+                                <div class="flex items-end">
+                                    <span class="text-sm font-semibold text-gray-800">68</span>
+                                    <span class="text-xs text-gray-500 ml-1">/ 120 g</span>
+                                </div>
+                            </div>
+                            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 56%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Carbs -->
+                        <div class="nutrition-item">
+                            <div class="flex justify-between items-center mb-1">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700">Carbs</span>
+                                </div>
+                                <div class="flex items-end">
+                                    <span class="text-sm font-semibold text-gray-800">85</span>
+                                    <span class="text-xs text-gray-500 ml-1">/ 240 g</span>
+                                </div>
+                            </div>
+                            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-500 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fat -->
+                        <div class="nutrition-item">
+                            <div class="flex justify-between items-center mb-1">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700">Fat</span>
+                                </div>
+                                <div class="flex items-end">
+                                    <span class="text-sm font-semibold text-gray-800">32</span>
+                                    <span class="text-xs text-gray-500 ml-1">/ 65 g</span>
+                                </div>
+                            </div>
+                            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 rounded-full" style="width: 49%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health tip -->
+            <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="text-xs text-gray-600">Your protein intake is on track today. Consider increasing your carb intake at dinner for optimal energy.</p>
+                </div>
+            </div>
+        `;
+        section.appendChild(nutritionWidget);
+        
+        return section;
     }
     
     /**
