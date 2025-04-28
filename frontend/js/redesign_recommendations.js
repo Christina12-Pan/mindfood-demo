@@ -236,23 +236,23 @@
         // 添加推荐卡片
         cardsContainer.appendChild(createRecommendationCard(
             'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-            '营养学知识',
+            'Nutrition Knowledge',
             'Why Mediterranean Diet is Perfect for Pre-diabetic Conditions',
-            '基于您的饮食记录，地中海饮食可能适合您的健康状况'
+            'Based on your food log, the Mediterranean diet may be suitable for your health condition.'
         ));
         
         cardsContainer.appendChild(createRecommendationCard(
             'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-            '社区热门',
+            'Community Popular',
             'My 30-Day Journey with Low-Carb Meals: Before & After Results',
-            '3.2k 用户浏览了这篇文章，与您的饮食偏好相似'
+            '3.2k users viewed this article, similar to your dietary preferences'
         ));
         
         cardsContainer.appendChild(createRecommendationCard(
             'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-            '健康指南',
+            'Health Guide',
             'Simple Glucose-Friendly Snacks for Your Busy Workdays',
-            '根据您的日程安排和血糖波动情况推荐'
+            'Recommended based on your schedule and blood sugar fluctuations'
         ));
         
         container.appendChild(cardsContainer);

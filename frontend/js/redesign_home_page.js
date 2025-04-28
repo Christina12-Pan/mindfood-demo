@@ -377,6 +377,8 @@
         topBarContent.className = 'flex items-center justify-between';
         
         // 创建AI助手头像
+        const aiAvatarWrapper = document.createElement('div');
+        aiAvatarWrapper.className = 'flex flex-col items-center';
         const aiAvatar = document.createElement('div');
         aiAvatar.className = 'w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center cursor-pointer';
         aiAvatar.innerHTML = `
@@ -388,6 +390,12 @@
             console.log('AI Assistant avatar clicked');
             // 这里可以添加跳转到AI助手咨询界面的逻辑
         });
+        // AI助手标记
+        const aiLabel = document.createElement('span');
+        aiLabel.className = 'text-[10px] text-[#FFBE98] font-medium mt-1';
+        aiLabel.textContent = 'AI Assistant';
+        aiAvatarWrapper.appendChild(aiAvatar);
+        aiAvatarWrapper.appendChild(aiLabel);
         
         // 创建搜索框
         const searchBar = document.createElement('div');
@@ -419,7 +427,7 @@
         `;
         
         // 组合顶部栏
-        topBarContent.appendChild(aiAvatar);
+        topBarContent.appendChild(aiAvatarWrapper);
         topBarContent.appendChild(searchBar);
         topBarContent.appendChild(notificationIcon);
         
@@ -519,40 +527,25 @@
         
         // 情景选择卡片
         const scenariosContainer = document.createElement('div');
-        scenariosContainer.className = 'grid grid-cols-3 gap-3';
-        
-        // 情景1：家庭
-        const homeScenario = createScenarioCard(
-            'Home',
+        scenariosContainer.className = 'grid grid-cols-2 gap-3';
+        // Eat at Home
+        const eatAtHomeScenario = createScenarioCard(
+            'Eat at Home',
             `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>`,
             '#FFE5D6'
         );
-        
-        // 情景2：一个人外食
-        const soloScenario = createScenarioCard(
+        // Dining Out
+        const diningOutScenario = createScenarioCard(
             'Dining Out',
             `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>`,
             '#E1F5FE'
         );
-        
-        // 情景3：聚会
-        const partyScenario = createScenarioCard(
-            'Party',
-            `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>`,
-            '#E8F5E9'
-        );
-        
-        // 添加情景卡片到容器
-        scenariosContainer.appendChild(homeScenario);
-        scenariosContainer.appendChild(soloScenario);
-        scenariosContainer.appendChild(partyScenario);
-        
+        scenariosContainer.appendChild(eatAtHomeScenario);
+        scenariosContainer.appendChild(diningOutScenario);
         container.appendChild(scenariosContainer);
         
         return container;
@@ -566,26 +559,13 @@
         const container = document.createElement('div');
         container.className = 'mt-6 mb-4';
         
-        // 标题和查看更多
+        // 标题
         const titleContainer = document.createElement('div');
-        titleContainer.className = 'flex justify-between items-center mb-3 px-3 py-2 rounded-lg';
-        titleContainer.style.background = 'rgba(255, 255, 255, 0.6)';
-        titleContainer.style.backdropFilter = 'blur(4px)';
-        titleContainer.style.webkitBackdropFilter = 'blur(4px)';
-        titleContainer.style.border = '1px solid rgba(255, 255, 255, 0.4)';
-        
+        titleContainer.className = 'flex justify-between items-center mb-3';
         const title = document.createElement('h2');
         title.className = 'text-lg font-semibold text-gray-800';
         title.textContent = 'Recommendations for you';
-        
-        const viewMore = document.createElement('a');
-        viewMore.href = '#';
-        viewMore.className = 'text-sm text-[#FFBE98]';
-        viewMore.textContent = 'View more';
-        
         titleContainer.appendChild(title);
-        titleContainer.appendChild(viewMore);
-        
         container.appendChild(titleContainer);
         
         return container;
@@ -695,15 +675,15 @@
         
         const categoryElement = document.createElement('div');
         categoryElement.className = 'text-xs font-medium text-[#FFBE98] mb-1';
-        categoryElement.textContent = category;
+        categoryElement.textContent = category; // 确保category为英文
         
         const titleElement = document.createElement('h3');
         titleElement.className = 'text-sm font-medium text-gray-800 mb-1 line-clamp-2';
-        titleElement.textContent = title;
+        titleElement.textContent = title; // 确保title为英文
         
         const infoElement = document.createElement('div');
         infoElement.className = 'text-xs text-gray-500';
-        infoElement.textContent = info;
+        infoElement.textContent = info; // 确保info为英文
         
         contentContainer.appendChild(categoryElement);
         contentContainer.appendChild(titleElement);
