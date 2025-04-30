@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFood - 外食管理</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFBE98',
+                        primaryLight: '#FFF5EE',
+                        primaryDark: '#FFA77B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自定义样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .w-1\/7 {
+            width: 14.285%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 应用容器 -->
+    <div id="app"></div>
+    
+    <!-- JavaScript -->
+    <script src="dining_out_management.js"></script>
+</body>
+</html> 
