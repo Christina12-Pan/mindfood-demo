@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mindfood - Pre-diabetes Diet Management App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MindFood APP原型</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- 紧急修复脚本 - 最先执行 -->
+    <script src="frontend/js/emergency_fix.js"></script>
+    <!-- 外部CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <!-- 自定义CSS -->
+    <link rel="stylesheet" href="frontend/css/styles.css">
+    <link rel="stylesheet" href="frontend/css/components.css">
+    <link rel="stylesheet" href="frontend/css/animations.css">
+    <link rel="stylesheet" href="frontend/css/fix_navbar.css"> <!-- 添加修复导航栏的CSS -->
+    <!-- 加载字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 页面加载前的关键脚本 -->
+    <script src="frontend/js/clean_extra_navbars.js"></script> <!-- 添加修复导航栏的JS -->
     <!-- 预加载和优化脚本，防止原始内容闪烁 -->
     <script src="frontend/js/preload_redesign.js"></script>
     <script src="frontend/js/optimize_page_loading.js"></script>

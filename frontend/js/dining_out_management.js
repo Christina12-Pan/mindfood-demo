@@ -1,6 +1,6 @@
 /**
  * @fileoverview 外食管理功能界面 - 包含点餐决策、营养分析和多人用餐指导
- * @version 1.0.0
+ * @version 1.2.0
  */
 
 // 对于mindfood_prototype.html中的整合，我们使用window加载事件代替DOMContentLoaded
@@ -71,21 +71,6 @@ function renderMainInterface() {
               </svg>
             </button>
             
-            <button id="nutrition-dashboard-btn" class="bg-white rounded-xl shadow-md p-4 flex items-center">
-              <div class="w-12 h-12 rounded-full bg-[#FFBE98] flex items-center justify-center mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <div class="flex-1">
-                <h2 class="text-lg font-medium text-gray-900">营养看板</h2>
-                <p class="text-gray-600 text-sm">实时跟踪营养数据</p>
-              </div>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            
             <button id="group-dining-btn" class="bg-white rounded-xl shadow-md p-4 flex items-center">
               <div class="w-12 h-12 rounded-full bg-[#FFBE98] flex items-center justify-center mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,39 +102,6 @@ function renderMainInterface() {
           </div>
         </div>
       </main>
-
-      <!-- 底部导航栏 -->
-      <nav class="bg-white shadow-lg fixed bottom-0 w-full z-10">
-        <div class="container mx-auto">
-          <div class="flex justify-around py-3">
-            <button class="flex flex-col items-center justify-center w-16">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-              <span class="text-xs text-gray-400">Home</span>
-            </button>
-            <button class="flex flex-col items-center justify-center w-16">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#FFBE98]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
-              </svg>
-              <span class="text-xs text-[#FFBE98]">Dining</span>
-            </button>
-            <button class="flex flex-col items-center justify-center w-16">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="text-xs text-gray-400">Stats</span>
-            </button>
-            <button class="flex flex-col items-center justify-center w-16">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span class="text-xs text-gray-400">Settings</span>
-            </button>
-          </div>
-        </div>
-      </nav>
     </div>
   `;
 }
@@ -160,10 +112,6 @@ function renderMainInterface() {
 function setupEventListeners() {
   document.getElementById('smart-ordering-btn')?.addEventListener('click', function() {
     renderSmartOrderingInterface();
-  });
-  
-  document.getElementById('nutrition-dashboard-btn')?.addEventListener('click', function() {
-    renderNutritionDashboardInterface();
   });
   
   document.getElementById('group-dining-btn')?.addEventListener('click', function() {
@@ -286,238 +234,6 @@ function renderSmartOrderingInterface() {
   document.getElementById('scan-menu-btn')?.addEventListener('click', function() {
     // 在真实应用中，这里会调用相机API或文件选择器
     alert('相机功能正在开发中，请稍后再试！');
-  });
-}
-
-/**
- * 渲染动态营养看板界面
- */
-function renderNutritionDashboardInterface() {
-  const contentArea = document.getElementById('content-area');
-  
-  if (!contentArea) {
-    console.error('无法找到内容区域元素');
-    return;
-  }
-  
-  contentArea.innerHTML = `
-    <div class="nutrition-dashboard-container">
-      <div class="bg-white rounded-xl shadow-md p-4 mb-4">
-        <h2 class="text-xl font-semibold mb-4">营养看板</h2>
-        
-        <!-- 今日摄入概览 -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="text-lg font-medium">今日摄入概览</h3>
-            <span class="text-sm text-gray-500">2023年6月18日</span>
-          </div>
-          
-          <!-- 卡路里进度 -->
-          <div class="mb-4">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-sm font-medium">卡路里</span>
-              <span class="text-sm text-gray-500">1,250 / 2,000 kcal</span>
-            </div>
-            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
-              <div class="h-full bg-[#FFBE98] rounded-full" style="width: 62.5%"></div>
-            </div>
-          </div>
-          
-          <!-- 营养素网格 -->
-          <div class="grid grid-cols-3 gap-3">
-            <div class="bg-gray-50 rounded-lg p-3 text-center">
-              <p class="text-sm text-gray-500 mb-1">蛋白质</p>
-              <p class="font-semibold">75g</p>
-              <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-1">
-                <div class="h-full bg-blue-500 rounded-full" style="width: 80%"></div>
-              </div>
-            </div>
-            <div class="bg-gray-50 rounded-lg p-3 text-center">
-              <p class="text-sm text-gray-500 mb-1">碳水</p>
-              <p class="font-semibold">145g</p>
-              <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-1">
-                <div class="h-full bg-yellow-500 rounded-full" style="width: 60%"></div>
-              </div>
-            </div>
-            <div class="bg-gray-50 rounded-lg p-3 text-center">
-              <p class="text-sm text-gray-500 mb-1">脂肪</p>
-              <p class="font-semibold">48g</p>
-              <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-1">
-                <div class="h-full bg-red-500 rounded-full" style="width: 70%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 最近餐食记录 -->
-        <div class="mb-6">
-          <h3 class="text-lg font-medium mb-3">今日餐食记录</h3>
-          
-          <div class="space-y-3">
-            <!-- 早餐 -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              <div class="flex justify-between items-center mb-2">
-                <h4 class="font-medium">早餐</h4>
-                <span class="text-xs text-gray-500">08:30 AM</span>
-              </div>
-              <div class="space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>全麦吐司</span>
-                  <span class="text-gray-500">180 kcal</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span>鳄梨</span>
-                  <span class="text-gray-500">120 kcal</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span>煮鸡蛋</span>
-                  <span class="text-gray-500">70 kcal</span>
-                </div>
-              </div>
-              <div class="flex justify-between mt-2 pt-2 border-t border-gray-200 text-sm">
-                <span class="font-medium">总计</span>
-                <span class="font-medium">370 kcal</span>
-              </div>
-            </div>
-            
-            <!-- 午餐 -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              <div class="flex justify-between items-center mb-2">
-                <h4 class="font-medium">午餐</h4>
-                <span class="text-xs text-gray-500">12:45 PM</span>
-              </div>
-              <div class="space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>三文鱼沙拉</span>
-                  <span class="text-gray-500">320 kcal</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span>全麦面包</span>
-                  <span class="text-gray-500">120 kcal</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span>混合莓果</span>
-                  <span class="text-gray-500">90 kcal</span>
-                </div>
-              </div>
-              <div class="flex justify-between mt-2 pt-2 border-t border-gray-200 text-sm">
-                <span class="font-medium">总计</span>
-                <span class="font-medium">530 kcal</span>
-              </div>
-            </div>
-            
-            <!-- 加餐 -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              <div class="flex justify-between items-center mb-2">
-                <h4 class="font-medium">加餐</h4>
-                <span class="text-xs text-gray-500">03:30 PM</span>
-              </div>
-              <div class="space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>希腊酸奶</span>
-                  <span class="text-gray-500">150 kcal</span>
-                </div>
-                <div class="flex justify-between text-sm">
-                  <span>坚果混合</span>
-                  <span class="text-gray-500">200 kcal</span>
-                </div>
-              </div>
-              <div class="flex justify-between mt-2 pt-2 border-t border-gray-200 text-sm">
-                <span class="font-medium">总计</span>
-                <span class="font-medium">350 kcal</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- 添加餐食按钮 -->
-          <button id="add-meal-btn" class="w-full mt-4 bg-[#FFBE98] hover:bg-[#FFA77B] text-white font-medium py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            记录新餐食
-          </button>
-        </div>
-      </div>
-      
-      <!-- 营养分析与建议 -->
-      <div class="bg-white rounded-xl shadow-md p-4">
-        <h3 class="text-lg font-medium mb-3">营养分析与建议</h3>
-        
-        <!-- 营养摄入趋势图 -->
-        <div class="bg-gray-50 rounded-lg p-4 mb-4">
-          <h4 class="font-medium mb-3">本周摄入趋势</h4>
-          <div class="h-40 bg-white rounded border border-gray-200 p-2 flex items-end justify-between">
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 50%"></div>
-              <span class="text-xs mt-1">一</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 70%"></div>
-              <span class="text-xs mt-1">二</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 60%"></div>
-              <span class="text-xs mt-1">三</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 80%"></div>
-              <span class="text-xs mt-1">四</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 65%"></div>
-              <span class="text-xs mt-1">五</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 45%"></div>
-              <span class="text-xs mt-1">六</span>
-            </div>
-            <div class="flex flex-col items-center w-1/7">
-              <div class="bg-[#FFBE98] w-6 rounded-t" style="height: 62%"></div>
-              <span class="text-xs mt-1">日</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 营养建议 -->
-        <div class="bg-gray-50 rounded-lg p-4">
-          <h4 class="font-medium mb-2">个性化营养建议</h4>
-          <ul class="space-y-2">
-            <li class="text-sm flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>您今天的蛋白质摄入达标，很好地支持了肌肉健康。</span>
-            </li>
-            <li class="text-sm flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              <span>您的膳食纤维摄入略低，建议增加全谷物和蔬菜摄入。</span>
-            </li>
-            <li class="text-sm flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>您的水分摄入低于目标，建议每天至少饮用2升水。</span>
-            </li>
-          </ul>
-          
-          <button id="view-full-analysis-btn" class="w-full mt-4 bg-white border border-[#FFBE98] text-[#FFBE98] hover:bg-[#FFF5EE] font-medium py-2 px-4 rounded-lg transition duration-300">
-            查看完整分析
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // 添加记录新餐食按钮的点击事件
-  document.getElementById('add-meal-btn')?.addEventListener('click', function() {
-    alert('记录餐食功能正在开发中，请稍后再试！');
-  });
-  
-  // 添加查看完整分析按钮的点击事件
-  document.getElementById('view-full-analysis-btn')?.addEventListener('click', function() {
-    alert('完整营养分析功能正在开发中，请稍后再试！');
   });
 }
 

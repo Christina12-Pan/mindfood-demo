@@ -1,0 +1,43 @@
+/**
+ * @fileoverview 修复多余导航栏的样式
+ * @version 1.0.0
+ */
+
+/* 全局隐藏规则 - 隐藏所有不在.screen容器内的导航栏 */
+body > .nav-bottom,
+body > div:not(.screen):not(.screens-container) > .nav-bottom,
+.extra-navbar {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+  pointer-events: none !important;
+}
+
+/* 确保只有在screen容器内的导航栏才会显示 */
+.screen .nav-bottom {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
+  pointer-events: auto !important;
+}
+
+/* 修复外食管理界面中可能的导航栏问题 */
+.screen[data-page="dining-out-management"] #dining-out-app .nav-bottom {
+  display: none !important;
+}
+
+/* 修复内容区域的底部间距，确保不被导航栏遮挡 */
+.scrollable-content {
+  padding-bottom: 80px !important; 
+} 
