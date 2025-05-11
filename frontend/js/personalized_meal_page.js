@@ -56,7 +56,7 @@
         header.className = 'flex items-center justify-between p-4 border-b border-gray-200';
         header.innerHTML = `
             <h1 class="text-xl font-semibold text-gray-800">Personalized Meal</h1>
-            <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.navigateToPage('home')">
+            <button class="p-2 rounded-full hover:bg-gray-100" onclick="showScreen('home')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
@@ -82,19 +82,19 @@
         navBottom.innerHTML = `
             <div class="bg-white border-t border-gray-200 px-6 py-2">
                 <div class="flex justify-between items-center">
-                    <div class="flex flex-col items-center" data-page="home">
+                    <div class="flex flex-col items-center" onclick="showScreen('home')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <span class="nav-text">Home</span>
                     </div>
-                    <div class="flex flex-col items-center" data-page="logs">
+                    <div class="flex flex-col items-center" onclick="showScreen('log')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                         <span class="nav-text">Logs</span>
                     </div>
-                    <div class="flex flex-col items-center relative" data-page="scan">
+                    <div class="flex flex-col items-center relative" onclick="showScreen('dish-recognition')">
                         <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center -mt-5 shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -103,600 +103,17 @@
                         </div>
                         <span class="nav-text">Scan</span>
                     </div>
-                    <div class="flex flex-col items-center" data-page="community">
+                    <div class="flex flex-col items-center" onclick="showScreen('community')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <span class="nav-text">Community</span>
                     </div>
-                    <div class="flex flex-col items-center" data-page="profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="flex flex-col items-center" onclick="showScreen('personalized-meal')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon active" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span class="nav-text">Profile</span>
-                    </div>
-                </div>
-            </div>
-            <div class="ios-home-indicator"></div>
-        `;
-        screen.appendChild(navBottom);
-        
-        // 添加到body
-        document.body.appendChild(screen);
-        
-        // 添加导航事件
-        addNavItemClickEvents(navBottom);
-    }
-    
-    /**
-     * 创建Weekly Meal Prep界面
-     */
-    function createWeeklyMealPrepScreen() {
-        // 创建屏幕容器
-        const screen = document.createElement('div');
-        screen.className = 'screen bg-white flex flex-col';
-        screen.setAttribute('data-page', 'weekly-meal-prep');
-        
-        // 添加iOS状态栏
-        const statusBar = document.createElement('div');
-        statusBar.className = 'ios-status-bar bg-white flex justify-between items-center px-6';
-        statusBar.innerHTML = `
-            <span class="text-sm font-semibold">9:41</span>
-            <div class="flex">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H14a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7h-4v4h4V7zm1-2h.5a.5.5 0 01.5.5v9a.5.5 0 01-.5.5H15V5z" />
-                </svg>
-            </div>
-        `;
-        screen.appendChild(statusBar);
-        
-        // 添加标题栏
-        const header = document.createElement('div');
-        header.className = 'flex items-center justify-between p-4 border-b border-gray-200';
-        header.innerHTML = `
-            <h1 class="text-xl font-semibold text-gray-800">Weekly Meal Prep</h1>
-            <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.navigateToPage('personalized-meal')">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-            </button>
-        `;
-        screen.appendChild(header);
-        
-        // 添加可滚动内容区域
-        const scrollableContent = document.createElement('div');
-        scrollableContent.className = 'scrollable-content flex-1 overflow-y-auto p-4';
-        
-        // 修改scrollableContent的内容
-        scrollableContent.innerHTML = `
-            <div class="progress-section mb-6">
-                <div class="flex justify-between items-center mb-2">
-                    <h3 class="text-base font-medium text-gray-800">Progress</h3>
-                    <span class="text-sm text-primary">35% Complete</span>
-                </div>
-                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-primary rounded-full" style="width: 35%"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">Deadline: Today at 6:00 PM</p>
-            </div>
-            
-            <div class="tasks-section mb-6">
-                <h3 class="text-base font-medium text-gray-800 mb-3">Prep Tasks</h3>
-                
-                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
-                    <div class="flex items-start">
-                        <input type="checkbox" class="mt-1 mr-3" id="task1">
-                        <div>
-                            <label for="task1" class="block text-sm font-medium text-gray-800">Chop vegetables for the week</label>
-                            <p class="text-xs text-gray-500 mt-1">Onions, bell peppers, carrots, celery</p>
-                            <div class="efficiency-tip mt-2 p-2 bg-yellow-50 rounded text-xs text-yellow-700">
-                                <span class="font-medium">Efficiency Tip:</span> Chop onions while boiling broth for soup
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
-                    <div class="flex items-start">
-                        <input type="checkbox" class="mt-1 mr-3" id="task2">
-                        <div>
-                            <label for="task2" class="block text-sm font-medium text-gray-800">Cook chicken breasts</label>
-                            <p class="text-xs text-gray-500 mt-1">For salads and curry dishes</p>
-                            <div class="ingredient-reuse mt-2 p-2 bg-blue-50 rounded text-xs text-blue-700">
-                                <span class="font-medium">Ingredient Reuse:</span> Use cooked chicken for both salad and curry
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
-                    <div class="flex items-start">
-                        <input type="checkbox" class="mt-1 mr-3" id="task3" checked>
-                        <div>
-                            <label for="task3" class="block text-sm font-medium text-gray-800 line-through">Prepare quinoa</label>
-                            <p class="text-xs text-gray-500 mt-1 line-through">For lunch bowls and dinner sides</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
-                    <div class="flex items-start">
-                        <input type="checkbox" class="mt-1 mr-3" id="task4">
-                        <div>
-                            <label for="task4" class="block text-sm font-medium text-gray-800">Bake salmon fillets</label>
-                            <p class="text-xs text-gray-500 mt-1">For Sunday and Monday dinner</p>
-                            <div class="equipment-status mt-2 p-2 bg-red-50 rounded text-xs text-red-700">
-                                <span class="font-medium">Equipment Conflict:</span> Oven will be in use from 4-5 PM for baking
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="recipes-section mb-6">
-                <div class="flex justify-between items-center mb-3">
-                    <h3 class="text-base font-medium text-gray-800">Recipes to Cook</h3>
-                    <button class="text-xs text-primary font-medium">View All</button>
-                </div>
-                
-                <div class="grid grid-cols-1 gap-3">
-                    <div class="recipe-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                                 alt="Chicken Curry" 
-                                 class="w-full h-40 object-cover">
-                            <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-800">
-                                45 min
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <h4 class="text-base font-medium text-gray-800">Chicken Curry</h4>
-                            <p class="text-xs text-gray-500 mt-1">Using prepped chicken and vegetables</p>
-                            <div class="mt-2 flex items-center text-xs text-gray-500">
-                                <span class="mr-3">Prep: 15 min</span>
-                                <span>Cook: 30 min</span>
-                            </div>
-                            <div class="mt-3 flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <span class="text-xs text-primary font-medium mr-2">Ready to cook</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <button class="bg-primary text-white text-xs py-1 px-3 rounded-full">Start Cooking</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="recipe-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                                 alt="Quinoa Bowl" 
-                                 class="w-full h-40 object-cover">
-                            <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-800">
-                                20 min
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <h4 class="text-base font-medium text-gray-800">Quinoa Power Bowl</h4>
-                            <p class="text-xs text-gray-500 mt-1">Using prepped quinoa and vegetables</p>
-                            <div class="mt-2 flex items-center text-xs text-gray-500">
-                                <span class="mr-3">Prep: 10 min</span>
-                                <span>Cook: 10 min</span>
-                            </div>
-                            <div class="mt-3 flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <span class="text-xs text-primary font-medium mr-2">Ready to cook</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <button class="bg-primary text-white text-xs py-1 px-3 rounded-full">Start Cooking</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="meal-kits-section mb-6">
-                <div class="flex justify-between items-center mb-3">
-                    <div>
-                        <h3 class="text-base font-medium text-gray-800">Weekly Meal Plan</h3>
-                        <p class="text-xs text-gray-500 mt-1">Your personalized meals for the week</p>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <!-- Monday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Monday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                                <div class="flex items-center mb-2">
-                                    <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <div class="space-y-2.5 w-3/5">
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Chicken Curry</div>
-                                            <div class="text-xs text-gray-500">Main</div>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Brown Rice</div>
-                                            <div class="text-xs text-gray-500">Side</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <span class="text-xs text-gray-500">450 cal</span>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                                            </svg>
-                                            <span class="text-xs text-gray-500">Heat for 2 min</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                                <div class="flex items-center mb-2">
-                                    <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <div class="space-y-2.5 w-3/5">
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Grilled Salmon</div>
-                                            <div class="text-xs text-gray-500">Main</div>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Quinoa</div>
-                                            <div class="text-xs text-gray-500">Side</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <span class="text-xs text-gray-500">520 cal</span>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                                            </svg>
-                                            <span class="text-xs text-gray-500">Heat for 2.5 min</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tuesday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Tuesday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                                <div class="flex items-center mb-2">
-                                    <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <div class="space-y-2.5 w-3/5">
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Quinoa Bowl</div>
-                                            <div class="text-xs text-gray-500">Main</div>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Grilled Chicken</div>
-                                            <div class="text-xs text-gray-500">Protein</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                                            </svg>
-                                            <span>1.5 min</span>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <span>380 cal</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                                <div class="flex items-center mb-2">
-                                    <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <div class="space-y-2.5 w-3/5">
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Beef Stir-fry</div>
-                                            <div class="text-xs text-gray-500">Main</div>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-800 truncate">Brown Rice</div>
-                                            <div class="text-xs text-gray-500">Side</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col justify-end items-end text-xs text-gray-500 space-y-1">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                                            </svg>
-                                            <span>2 min</span>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <span>480 cal</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Wednesday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Wednesday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Mediterranean Bowl</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Hummus</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">420 cal</span>
-                                        <span class="text-xs text-gray-500">1 min</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Tofu Steak</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Sweet Potato</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">390 cal</span>
-                                        <span class="text-xs text-gray-500">2 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Thursday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Thursday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Poke Bowl</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Edamame</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">440 cal</span>
-                                        <span class="text-xs text-gray-500">1 min</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Turkey Meatballs</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Zucchini Noodles</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">410 cal</span>
-                                        <span class="text-xs text-gray-500">2.5 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Friday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Friday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Shrimp Bowl</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Cauliflower Rice</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">360 cal</span>
-                                        <span class="text-xs text-gray-500">2 min</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Cod Fillet</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Roasted Veggies</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">380 cal</span>
-                                        <span class="text-xs text-gray-500">2 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Saturday -->
-                    <div class="day-section">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2">Saturday</h4>
-                        <div class="space-y-3">
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Lunch</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Buddha Bowl</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Avocado</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">420 cal</span>
-                                        <span class="text-xs text-gray-500">1.5 min</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="meal-box bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs font-medium text-primary px-2 py-0.5 bg-primary bg-opacity-10 rounded-full">Dinner</span>
-                                        <div class="flex items-center space-x-6">
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Veggie Curry</span>
-                                                <span class="text-xs text-gray-500">Main</span>
-                                            </div>
-                                            <div class="flex flex-col">
-                                                <span class="text-sm text-gray-700">Coconut Rice</span>
-                                                <span class="text-xs text-gray-500">Side</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-xs text-gray-500">460 cal</span>
-                                        <span class="text-xs text-gray-500">2 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        screen.appendChild(scrollableContent);
-        
-        // 添加底部导航栏
-        const navBottom = document.createElement('div');
-        navBottom.className = 'nav-bottom glassmorphism';
-        navBottom.innerHTML = `
-            <div class="bg-white border-t border-gray-200 px-6 py-2">
-                <div class="flex justify-between items-center">
-                    <div class="flex flex-col items-center" data-page="home">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        <span class="nav-text">Home</span>
-                    </div>
-                    <div class="flex flex-col items-center" data-page="logs">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span class="nav-text">Logs</span>
-                    </div>
-                    <div class="flex flex-col items-center relative" data-page="scan">
-                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center -mt-5 shadow-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                        </div>
-                        <span class="nav-text">Scan</span>
-                    </div>
-                    <div class="flex flex-col items-center" data-page="community">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span class="nav-text">Community</span>
-                    </div>
-                    <div class="flex flex-col items-center" data-page="profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span class="nav-text">Profile</span>
+                        <span class="nav-text active">Profile</span>
                     </div>
                 </div>
             </div>
@@ -776,7 +193,7 @@
         
         // 添加点击事件
         card.addEventListener('click', () => {
-            window.navigateToPage('weekly-meal-prep');
+            showScreen('weekly-meal-prep');
         });
         
         return card;
@@ -1040,18 +457,13 @@
     }
     
     /**
-     * 添加导航项点击事件
-     * @param {HTMLElement} navBar 导航栏元素
+     * 为导航项添加点击事件
+     * @param {HTMLElement} navBar - 导航栏元素
      */
     function addNavItemClickEvents(navBar) {
-        const navItems = navBar.querySelectorAll('[data-page]');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const page = this.getAttribute('data-page');
-                window.navigateToPage(page);
-            });
-        });
+        // 使用showScreen函数来处理页面跳转，不再使用自定义的navigateToPage函数
+        const navItems = navBar.querySelectorAll('[onclick^="showScreen"]');
+        console.log(`找到 ${navItems.length} 个导航项`);
     }
     
     /**
@@ -1102,8 +514,243 @@
         });
     }
     
+    /**
+     * 创建Weekly Meal Prep界面
+     */
+    function createWeeklyMealPrepScreen() {
+        // 创建屏幕容器
+        const screen = document.createElement('div');
+        screen.className = 'screen bg-white flex flex-col';
+        screen.setAttribute('data-page', 'weekly-meal-prep');
+        
+        // 添加iOS状态栏
+        const statusBar = document.createElement('div');
+        statusBar.className = 'ios-status-bar bg-white flex justify-between items-center px-6';
+        statusBar.innerHTML = `
+            <span class="text-sm font-semibold">9:41</span>
+            <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H14a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7h-4v4h4V7zm1-2h.5a.5.5 0 01.5.5v9a.5.5 0 01-.5.5H15V5z" />
+                </svg>
+            </div>
+        `;
+        screen.appendChild(statusBar);
+        
+        // 添加标题栏
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between p-4 border-b border-gray-200';
+        header.innerHTML = `
+            <h1 class="text-xl font-semibold text-gray-800">Weekly Meal Prep</h1>
+            <button class="p-2 rounded-full hover:bg-gray-100" onclick="showScreen('personalized-meal')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </button>
+        `;
+        screen.appendChild(header);
+        
+        // 添加可滚动内容区域
+        const scrollableContent = document.createElement('div');
+        scrollableContent.className = 'scrollable-content flex-1 overflow-y-auto p-4';
+        
+        // 修改scrollableContent的内容
+        scrollableContent.innerHTML = `
+            <div class="progress-section mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-base font-medium text-gray-800">Progress</h3>
+                    <span class="text-sm text-primary">35% Complete</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary rounded-full" style="width: 35%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">Deadline: Today at 6:00 PM</p>
+            </div>
+            
+            <div class="tasks-section mb-6">
+                <h3 class="text-base font-medium text-gray-800 mb-3">Prep Tasks</h3>
+                
+                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
+                    <div class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-3" id="task1">
+                        <div>
+                            <label for="task1" class="block text-sm font-medium text-gray-800">Chop vegetables for the week</label>
+                            <p class="text-xs text-gray-500 mt-1">Onions, bell peppers, carrots, celery</p>
+                            <div class="efficiency-tip mt-2 p-2 bg-yellow-50 rounded text-xs text-yellow-700">
+                                <span class="font-medium">Efficiency Tip:</span> Chop onions while boiling broth for soup
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
+                    <div class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-3" id="task2">
+                        <div>
+                            <label for="task2" class="block text-sm font-medium text-gray-800">Cook chicken breasts</label>
+                            <p class="text-xs text-gray-500 mt-1">For salads and curry dishes</p>
+                            <div class="ingredient-reuse mt-2 p-2 bg-blue-50 rounded text-xs text-blue-700">
+                                <span class="font-medium">Ingredient Reuse:</span> Use cooked chicken for both salad and curry
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
+                    <div class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-3" id="task3" checked>
+                        <div>
+                            <label for="task3" class="block text-sm font-medium text-gray-800 line-through">Prepare quinoa</label>
+                            <p class="text-xs text-gray-500 mt-1 line-through">For lunch bowls and dinner sides</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="task-item p-3 bg-white rounded-lg shadow-sm mb-3 border border-gray-100">
+                    <div class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-3" id="task4">
+                        <div>
+                            <label for="task4" class="block text-sm font-medium text-gray-800">Bake salmon fillets</label>
+                            <p class="text-xs text-gray-500 mt-1">For Sunday and Monday dinner</p>
+                            <div class="equipment-status mt-2 p-2 bg-red-50 rounded text-xs text-red-700">
+                                <span class="font-medium">Equipment Conflict:</span> Oven will be in use from 4-5 PM for baking
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recipes-section mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-base font-medium text-gray-800">Recipes to Cook</h3>
+                    <button class="text-xs text-primary font-medium">View All</button>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="recipe-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Chicken Curry" 
+                                 class="w-full h-40 object-cover">
+                            <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-800">
+                                45 min
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="text-base font-medium text-gray-800">Chicken Curry</h4>
+                            <p class="text-xs text-gray-500 mt-1">Using prepped chicken and vegetables</p>
+                            <div class="mt-2 flex items-center text-xs text-gray-500">
+                                <span class="mr-3">Prep: 15 min</span>
+                                <span>Cook: 30 min</span>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-primary font-medium mr-2">Ready to cook</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <button class="bg-primary text-white text-xs py-1 px-3 rounded-full">Start Cooking</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Quinoa Bowl" 
+                                 class="w-full h-40 object-cover">
+                            <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-800">
+                                20 min
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="text-base font-medium text-gray-800">Quinoa Power Bowl</h4>
+                            <p class="text-xs text-gray-500 mt-1">Using prepped quinoa and vegetables</p>
+                            <div class="mt-2 flex items-center text-xs text-gray-500">
+                                <span class="mr-3">Prep: 10 min</span>
+                                <span>Cook: 10 min</span>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-primary font-medium mr-2">Ready to cook</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <button class="bg-primary text-white text-xs py-1 px-3 rounded-full">Start Cooking</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        screen.appendChild(scrollableContent);
+        
+        // 添加底部导航栏
+        const navBottom = document.createElement('div');
+        navBottom.className = 'nav-bottom glassmorphism';
+        navBottom.innerHTML = `
+            <div class="bg-white border-t border-gray-200 px-6 py-2">
+                <div class="flex justify-between items-center">
+                    <div class="flex flex-col items-center" onclick="showScreen('home')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="nav-text">Home</span>
+                    </div>
+                    <div class="flex flex-col items-center" onclick="showScreen('log')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="nav-text">Logs</span>
+                    </div>
+                    <div class="flex flex-col items-center relative" onclick="showScreen('dish-recognition')">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center -mt-5 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <span class="nav-text">Scan</span>
+                    </div>
+                    <div class="flex flex-col items-center" onclick="showScreen('community')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="nav-text">Community</span>
+                    </div>
+                    <div class="flex flex-col items-center" onclick="showScreen('personalized-meal')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon active" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span class="nav-text active">Profile</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ios-home-indicator"></div>
+        `;
+        screen.appendChild(navBottom);
+        
+        // 添加到body
+        document.body.appendChild(screen);
+        
+        // 添加导航事件
+        addNavItemClickEvents(navBottom);
+        
+        // 添加任务复选框事件
+        addTaskCheckboxEvents();
+    }
+    
     // 暴露函数到全局作用域
     window.showPersonalizedMealPage = function() {
-        window.navigateToPage('personalized-meal');
+        showScreen('personalized-meal');
     };
 })(); 
