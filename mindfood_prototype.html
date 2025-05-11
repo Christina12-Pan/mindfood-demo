@@ -1,25 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MindFood APP原型</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- 紧急修复脚本 - 最先执行 -->
-    <script src="frontend/js/emergency_fix.js"></script>
-    <!-- 外部CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
-    <!-- 自定义CSS -->
-    <link rel="stylesheet" href="frontend/css/styles.css">
-    <link rel="stylesheet" href="frontend/css/components.css">
-    <link rel="stylesheet" href="frontend/css/animations.css">
-    <link rel="stylesheet" href="frontend/css/fix_navbar.css"> <!-- 添加修复导航栏的CSS -->
-    <!-- 加载字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 页面加载前的关键脚本 -->
-    <script src="frontend/js/clean_extra_navbars.js"></script> <!-- 添加修复导航栏的JS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindfood - Pre-diabetes Diet Management App</title>
     <!-- 预加载和优化脚本，防止原始内容闪烁 -->
     <script src="frontend/js/preload_redesign.js"></script>
     <script src="frontend/js/optimize_page_loading.js"></script>
@@ -828,7 +812,7 @@
           padding-bottom: 150px !important; 
         }
         
-        /* 绝对定位导航栏容�?*/
+        /* 绝对定位导航栏容器 */
         .nav-container-wrapper {
           position: absolute !important;
           bottom: 0 !important;
@@ -838,7 +822,7 @@
           pointer-events: none !important; /* 允许点击底部通过 */
         }
         
-        /* 导航�?*/
+        /* 导航栏 */
         .nav-bottom {
           background: white !important;
           border-radius: 0 0 28px 28px !important;
@@ -849,16 +833,16 @@
           padding-top: 12px !important; /* 增加顶部内边距，为Scan按钮腾出空间 */
         }
         
-        /* 导航栏内部容�?*/
+        /* 导航栏内部容器 */
         .nav-content {
           display: flex !important;
           justify-content: space-between !important;
           align-items: flex-end !important; /* 底部对齐 */
           padding: 0 16px 10px !important;
-          position: relative !important; /* 为Scan按钮定位提供参�?*/
+          position: relative !important; /* 为Scan按钮定位提供参考 */
         }
         
-        /* 导航�?- 修复均匀布局 */
+        /* 导航项 - 修复均匀布局 */
         .nav-item {
           display: flex !important;
           flex-direction: column !important;
@@ -872,7 +856,7 @@
         
         /* Scan按钮容器特殊处理 */
         .nav-item[data-page="scan"] {
-          margin-top: -24px !important; /* 使按钮上�?*/
+          margin-top: -24px !important; /* 使按钮上移 */
         }
         
         /* 导航图标 */
@@ -902,7 +886,7 @@
           font-weight: 500 !important;
         }
         
-        /* 扫描按钮特殊样式 - 修复显示不完整问�?*/
+        /* 扫描按钮特殊样式 - 修复显示不完整问题 */
         .scan-button {
           width: 56px !important; /* 增加尺寸 */
           height: 56px !important; /* 增加尺寸 */
@@ -916,7 +900,7 @@
           left: 50% !important; /* 水平居中 */
           top: -28px !important; /* 上移 */
           transform: translateX(-50%) !important;
-          z-index: 5 !important; /* 确保显示在上?*/
+          z-index: 5 !important; /* 确保显示在上层 */
         }
         
         /* iOS home indicator */
@@ -928,9 +912,9 @@
           margin: 8px auto 12px !important;
         }
 
-        /* 修复导航栏上方多余白色区域问�?*/
+        /* 修复导航栏上方多余白色区域问题 */
         
-        /* 导航容器包装�?- 确保没有额外的背景色和内边距 */
+        /* 导航容器包装器 - 确保没有额外的背景色和内边距 */
         .nav-container-wrapper {
           position: absolute !important;
           bottom: 0 !important;
@@ -943,7 +927,7 @@
           margin: 0 !important; /* 移除所有外边距 */
         }
         
-        /* 导航�?- 移除顶部内边�?*/
+        /* 导航栏 - 移除顶部内边距 */
         .nav-bottom {
           background: white !important;
           border-radius: 0 0 28px 28px !important;
@@ -951,18 +935,18 @@
           overflow: visible !important; /* 修改为visible，允许Scan按钮突出 */
           pointer-events: auto !important;
           box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05) !important;
-          padding-top: 0 !important; /* 移除顶部内边�?*/
-          margin-top: 0 !important; /* 移除顶部外边�?*/
+          padding-top: 0 !important; /* 移除顶部内边距 */
+          margin-top: 0 !important; /* 移除顶部外边距 */
         }
         
-        /* 导航栏内部容�?- 调整为相对定�?*/
+        /* 导航栏内部容器 - 调整为相对定位 */
         .nav-content {
           display: flex !important;
           justify-content: space-between !important;
           align-items: flex-end !important;
-          padding: 10px 16px !important; /* 统一内边�?*/
+          padding: 10px 16px !important; /* 统一内边距 */
           position: relative !important;
-          background: white !important; /* 确保背景为白�?*/
+          background: white !important; /* 确保背景为白色 */
         }
         
         /* 扫描按钮特殊样式 - 调整位置 */
@@ -1283,28 +1267,6 @@
                 </div>
                 <div class="ios-home-indicator"></div>
             </div>
-        </div>
-
-        <!-- 菜单扫描页面 -->
-        <div class="screen bg-white" data-page="scan">
-            <div class="ios-status-bar bg-white flex justify-between items-center px-6">
-                <span class="text-sm font-semibold">9:41</span>
-                <div class="flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                        <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H14a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7h-4v4h4V7zm1-2h.5a.5.5 0 01.5.5v9a.5.5 0 01-.5.5H15V5z" />
-                    </svg>
-                </div>
-            </div>
-            
-            <!-- 空内容区�?- 新设计将通过JS完全动态创�?-->
-            <div class="content-container flex-1"></div>
         </div>
 
         <!-- 日志页面 -->
@@ -2467,15 +2429,6 @@
                             </svg>
                             <span class="nav-text active">Logs</span>
                         </div>
-                        <div class="flex flex-col items-center relative" onclick="showScreen('scan')">
-                            <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center -mt-5 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                            </div>
-                            <span class="nav-text">Scan</span>
-                        </div>
                         <div class="flex flex-col items-center" onclick="showScreen('log')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -3283,10 +3236,6 @@
 <script src="frontend/js/replace_food_log_with_logo.js"></script>
 <script src="frontend/js/replace_community_with_logo.js"></script>
 <script src="frontend/js/personalized_meal_page.js"></script>
-<!-- 添加外食管理功能脚本 -->
-<script src="frontend/js/dining_out_management.js"></script>
-<script src="frontend/js/add_dining_out_management.js"></script>
-<script src="frontend/js/fix_dining_out_page.js"></script>
 
         <!-- 其他页面内容... -->
 

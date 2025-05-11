@@ -536,37 +536,9 @@
             </svg>`,
             '#FFE5D6'
         );
-        // Dining Out
-        const diningOutScenario = createScenarioCard(
-            'Dining Out',
-            `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>`,
-            '#E1F5FE'
-        );
+        
         scenariosContainer.appendChild(eatAtHomeScenario);
-        scenariosContainer.appendChild(diningOutScenario);
         container.appendChild(scenariosContainer);
-        
-        return container;
-    }
-    
-    /**
-     * 创建智能推荐内容
-     * @returns {HTMLElement} 推荐内容元素
-     */
-    function createRecommendations() {
-        const container = document.createElement('div');
-        container.className = 'mt-6 mb-4';
-        
-        // 标题
-        const titleContainer = document.createElement('div');
-        titleContainer.className = 'flex justify-between items-center mb-3';
-        const title = document.createElement('h2');
-        title.className = 'text-lg font-semibold text-gray-800';
-        title.textContent = 'Recommendations for you';
-        titleContainer.appendChild(title);
-        container.appendChild(titleContainer);
         
         return container;
     }
@@ -646,60 +618,23 @@
     }
     
     /**
-     * 创建推荐卡片
-     * @param {string} imageUrl - 图片URL
-     * @param {string} category - 分类
-     * @param {string} title - 标题
-     * @param {string} info - 附加信息
-     * @returns {HTMLElement} 推荐卡片元素
+     * 创建智能推荐内容
+     * @returns {HTMLElement} 推荐内容元素
      */
-    function createRecommendationCard(imageUrl, category, title, info) {
-        // 保留此函数但不再使用，以便将来需要时可以恢复
-        const card = document.createElement('div');
-        card.className = 'flex items-center bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer';
+    function createRecommendations() {
+        const container = document.createElement('div');
+        container.className = 'mt-6 mb-4';
         
-        // 图片部分
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'w-20 h-20 flex-shrink-0';
+        // 标题
+        const titleContainer = document.createElement('div');
+        titleContainer.className = 'flex justify-between items-center mb-3';
+        const title = document.createElement('h2');
+        title.className = 'text-lg font-semibold text-gray-800';
+        title.textContent = 'Recommendations for you';
+        titleContainer.appendChild(title);
+        container.appendChild(titleContainer);
         
-        const image = document.createElement('img');
-        image.src = imageUrl;
-        image.alt = title;
-        image.className = 'w-full h-full object-cover';
-        
-        imageContainer.appendChild(image);
-        
-        // 内容部分
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'flex-1 p-3';
-        
-        const categoryElement = document.createElement('div');
-        categoryElement.className = 'text-xs font-medium text-[#FFBE98] mb-1';
-        categoryElement.textContent = category; // 确保category为英文
-        
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'text-sm font-medium text-gray-800 mb-1 line-clamp-2';
-        titleElement.textContent = title; // 确保title为英文
-        
-        const infoElement = document.createElement('div');
-        infoElement.className = 'text-xs text-gray-500';
-        infoElement.textContent = info; // 确保info为英文
-        
-        contentContainer.appendChild(categoryElement);
-        contentContainer.appendChild(titleElement);
-        contentContainer.appendChild(infoElement);
-        
-        // 组合卡片
-        card.appendChild(imageContainer);
-        card.appendChild(contentContainer);
-        
-        // 添加点击事件
-        card.addEventListener('click', function() {
-            console.log(`Recommendation card clicked: ${title}`);
-            // 这里可以添加跳转到详情页的逻辑
-        });
-        
-        return card;
+        return container;
     }
     
     /**
